@@ -11,8 +11,12 @@ if not getgenv().a then
         vu:Button2Up(Vector2.new(0,0),workspace.CurrentCamera.CFrame)
     end)
 end
+
 function SendMessageEMBED(url, embed)
     local http = game:GetService("HttpService")
+    local headers = {
+        ["Content-Type"] = "application/json"
+    }
     local headers = {
         ["Content-Type"] = "application/json"
     }
@@ -21,7 +25,7 @@ function SendMessageEMBED(url, embed)
             {
                 ["title"] = embed.title,
                 ["color"] = embed.color,
-                ["fields"] = embed.fields,
+                ["fields"] = embed.fields
             }
         }
     }
@@ -90,7 +94,7 @@ local function processListingInfo(uid, gems, item, version, shiny, amount, bough
     local embed = {
         ["title"]: snipeMessage,
         ["color"]: 5763719,
-        ["fields"] = fields,
+        ["fields"] = fields
     }
     SendMessageEMBED(getgenv.webhook, embed)
 end
