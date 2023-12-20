@@ -70,7 +70,8 @@ local function processListingInfo(uid, gems, item, version, shiny, amount, bough
         ["Content-Type"] = "application/json"
     }
     local data = {
-        ["embeds"]: [
+        ["content"] = "",
+        ["embeds"] = [
             {
                 ["title"] =  snipeMessage,
                 ["color"] = 3399065,
