@@ -48,20 +48,20 @@ local function processListingInfo(uid, gems, item, version, shiny, amount, bough
 
     local fields = {
         {
-            "name" = "PRICE:",
-            "value" = tostring(gems) .. " GEMS",
+            ["name"] = "PRICE:",
+            ["value"] = tostring(gems) .. " GEMS",
         },
         {
-            "name" = "BOUGHT FROM:",
-            "value" = tostring(boughtFrom),
+            ["name"] = "BOUGHT FROM:",
+            ["value"] = tostring(boughtFrom),
         },
         {
-            "name" = "AMOUNT:",
-            "value" = tostring(amount),
+            ["name"] = "AMOUNT:",
+            ["value"] = tostring(amount),
         },
         {
-            "name" = "PETID:",
-            "value" = tostring(uid),
+            ["name"] = "PETID:",
+            ["value"] = tostring(uid),
         }
     }
     
