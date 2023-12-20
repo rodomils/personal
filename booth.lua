@@ -153,7 +153,7 @@ local function jumpToServer()
     if not randomCount then
         randomCount = 2
     end
-    game:GetService("TeleportService").TeleportToPlaceInstance(15502339080, servers[math.random(1, randomCount)], game:GetService("Players").LocalPlayer) 
+    game:GetService("TeleportService"):TeleportToPlaceInstance(15502339080, servers[math.random(1, randomCount)], game:GetService("Players").LocalPlayer) 
 end
 
 local function chk()
