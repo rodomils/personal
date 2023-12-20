@@ -1,5 +1,3 @@
-repeat wait() until game:IsLoaded() and game.Players.LocalPlayer ~= nil and game.Players.LocalPlayer.Character ~= nil
-
 local Booths_Broadcast = game:GetService("ReplicatedStorage").Network:WaitForChild("Booths_Broadcast")
 
 if not getgenv().a then
