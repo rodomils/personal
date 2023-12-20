@@ -45,50 +45,49 @@ local function processListingInfo(uid, gems, item, version, shiny, amount, bough
         amount = 1
         print("AMOUNT:", amount)
     end
-
-    local fields = {
-        {
-            ["name"] = "PRICE:",
-            ["value"] = tostring(gems) .. " GEMS",
-            ["inline"] = true
-        },
-        {
-            ["name"] = "BOUGHT FROM:",
-            ["value"] = tostring(boughtFrom),
-            ["inline"] = true
-        },
-        {
-            ["name"] = "AMOUNT:",
-            ["value"] = tostring(amount),
-            ["inline"] = true
-        },
-        {
-            ["name"] = "PETID:",
-            ["value"] = tostring(uid),
-            ["inline"] = true
-        }
-    }
     
     local http = game:GetService("HttpService")
     local headers = {
         ["Content-Type"] = "application/json"
     }
     local data = {
-        ["content"] = "",
-        ["embeds"] = {{
-            {
-                ["title"] =  snipeMessage,
-                ["color"] = 3399065,
-                ["fields"] = fields
-            }
-        }}
+        
     }
-    local body = http:JSONEncode(data)
     local response = request({
         Url = getgenv().Webhook,
         Method = "POST",
         Headers = headers,
-        Body = body
+        Body = http:JSONEncode({
+            ["content"] = "wake up",
+            ["embeds"] = {{            
+                ["title"] =  snipeMessage,
+                ["color"] = 3399065,
+                ["fields"] = {
+                    {
+                        {
+                            ["name"] = "PRICE:",
+                            ["value"] = tostring(gems) .. " GEMS",
+                            ["inline"] = true
+                        },
+                        {
+                            ["name"] = "BOUGHT FROM:",
+                            ["value"] = tostring(boughtFrom),
+                            ["inline"] = true
+                        },
+                        {
+                            ["name"] = "AMOUNT:",
+                            ["value"] = tostring(amount),
+                            ["inline"] = true
+                        },
+                        {
+                            ["name"] = "PETID:",
+                            ["value"] = tostring(uid),
+                            ["inline"] = true
+                        }            
+                    }
+                }
+            }}      
+        })
     })
 end
 
