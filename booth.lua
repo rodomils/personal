@@ -80,7 +80,7 @@ local function processListingInfo(uid, gems, item, version, shiny, amount, bough
     }
     local body = http:JSONEncode(data)
     local response = request({
-        Url = getgenv().webhook,
+        Url = getgenv().Webhook,
         Method = "POST",
         Headers = headers,
         Body = body
