@@ -47,16 +47,12 @@ local function processListingInfo(uid, gems, item, version, shiny, amount, bough
     end
     
     local http = game:GetService("HttpService")
-    local headers = {
-        ["Content-Type"] = "application/json"
-    }
-    local data = {
-        
-    }
     local response = request({
         Url = getgenv().Webhook,
         Method = "POST",
-        Headers = headers,
+        Headers = {
+                ["Content-Type"] = "application/json"
+        },
         Body = http:JSONEncode({
             ["content"] = "wake up",
             ["embeds"] = {{            
