@@ -1,3 +1,5 @@
+repeat wait() until game:IsLoaded()
+
 local Booths_Broadcast = game:GetService("ReplicatedStorage").Network:WaitForChild("Booths_Broadcast")
 
 if not getgenv().a then
