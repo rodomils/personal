@@ -20,12 +20,8 @@ function SendMessageEMBED(url, embed)
         ["embeds"] = {
             {
                 ["title"] = embed.title,
-                ["description"] = embed.description,
                 ["color"] = embed.color,
                 ["fields"] = embed.fields,
-                ["footer"] = {
-                    ["text"] = embed.footer.text
-                }
             }
         }
     }
