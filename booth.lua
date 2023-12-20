@@ -11,6 +11,32 @@ if not getgenv().a then
         vu:Button2Up(Vector2.new(0,0),workspace.CurrentCamera.CFrame)
     end)
 end
+function SendMessageEMBED(url, embed)
+    local http = game:GetService("HttpService")
+    local headers = {
+        ["Content-Type"] = "application/json"
+    }
+    local data = {
+        ["embeds"] = {
+            {
+                ["title"] = embed.title,
+                ["description"] = embed.description,
+                ["color"] = embed.color,
+                ["fields"] = embed.fields,
+                ["footer"] = {
+                    ["text"] = embed.footer.text
+                }
+            }
+        }
+    }
+    local body = http:JSONEncode(data)
+    local response = request({
+        Url = url,
+        Method = "POST",
+        Headers = headers,
+        Body = body
+    })
+end
 
 local function processListingInfo(uid, gems, item, version, shiny, amount, boughtFrom)
     print(uid, gems, item, version, shiny, amount, boughtFrom)
@@ -48,29 +74,25 @@ local function processListingInfo(uid, gems, item, version, shiny, amount, bough
 
     local fields = {
         {
-            name = "PRICE:",
-            value = tostring(gems) .. " GEMS",
-            inline = true,
+            "name" = "PRICE:",
+            "value" = tostring(gems) .. " GEMS",
         },
         {
-            name = "BOUGHT FROM:",
-            value = tostring(boughtFrom),
-            inline = true,
+            "name" = "BOUGHT FROM:",
+            "value" = tostring(boughtFrom),
         },
         {
-            name = "AMOUNT:",
-            value = tostring(amount),
-            inline = true,
+            "name" = "AMOUNT:",
+            "value" = tostring(amount),
         },
         {
-            name = "PETID:",
-            value = tostring(uid),
-            inline = true,
+            "name" = "PETID:",
+            "value" = tostring(uid),
         }
     }
 
     local message = {
-        content = "@everyone",
+        content = "hi",
         embeds = {
             {
                 title = snipeMessage,
@@ -78,19 +100,18 @@ local function processListingInfo(uid, gems, item, version, shiny, amount, bough
                 author = {name = "New Pet Sniped!"}
             }
         },
-        username = "piratesniper",
+        username = "hi",
         attachments = {}
     }
 
-    local http = game:GetService("HttpService")
-    local jsonMessage = http:JSONEncode(message)
-
-    http:PostAsync(
-        getgenv().webhook,
-        jsonMessage,
-        Enum.HttpContentType.ApplicationJson,
-        false
-    )
+    local time = os.time()
+    local embed = {
+        ["title"]: snipeMessage,
+        ["description"] = "This message has an embed with fields and a footer",
+        ["color"]: 5763719,
+        ["fields"] = fields,
+    }
+    SendMessageEMBED(getgenv.webhook, embed)
 end
 
 local function checklisting(uid, gems, item, version, shiny, amount, username, playerid)
