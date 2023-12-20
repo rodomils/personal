@@ -45,46 +45,6 @@ local function processListingInfo(uid, gems, item, version, shiny, amount, bough
         amount = 1
         print("AMOUNT:", amount)
     end
-    
-    local http = game:GetService("HttpService")
-    local response = request({
-        Url = getgenv().Webhook,
-        Method = "POST",
-        Headers = {
-                ["Content-Type"] = "application/json"
-        },
-        Body = http:JSONEncode({
-            ["content"] = "wake up",
-            ["embeds"] = {{            
-                ["title"] =  snipeMessage,
-                ["color"] = 3399065,
-                ["fields"] = {
-                    {
-                        {
-                            ["name"] = "PRICE:",
-                            ["value"] = tostring(gems) .. " GEMS",
-                            ["inline"] = true
-                        },
-                        {
-                            ["name"] = "BOUGHT FROM:",
-                            ["value"] = tostring(boughtFrom),
-                            ["inline"] = true
-                        },
-                        {
-                            ["name"] = "AMOUNT:",
-                            ["value"] = tostring(amount),
-                            ["inline"] = true
-                        },
-                        {
-                            ["name"] = "PETID:",
-                            ["value"] = tostring(uid),
-                            ["inline"] = true
-                        }            
-                    }
-                }
-            }}      
-        })
-    })
 end
 
 local function checklisting(uid, gems, item, version, shiny, amount, username, playerid)
