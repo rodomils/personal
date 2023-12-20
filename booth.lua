@@ -91,23 +91,8 @@ local function processListingInfo(uid, gems, item, version, shiny, amount, bough
         }
     }
 
-    local message = {
-        content = "hi",
-        embeds = {
-            {
-                title = snipeMessage,
-                fields = fields,
-                author = {name = "New Pet Sniped!"}
-            }
-        },
-        username = "hi",
-        attachments = {}
-    }
-
-    local time = os.time()
     local embed = {
         ["title"]: snipeMessage,
-        ["description"] = "This message has an embed with fields and a footer",
         ["color"]: 5763719,
         ["fields"] = fields,
     }
