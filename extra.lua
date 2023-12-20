@@ -13,7 +13,7 @@ if not getgenv().a then
 end
 
 local function processListingInfo(uid, gems, item, version, shiny, amount, boughtFrom)
-    print(uid, gems, item, version, shiny, amount, boughtFrom)
+        print(uid, gems, item, version, shiny, amount, boughtFrom)
     print("BOUGHT FROM:", boughtFrom)
     print("UID:", uid)
     print("GEMS:", gems)
@@ -71,13 +71,13 @@ local function processListingInfo(uid, gems, item, version, shiny, amount, bough
     }
     local data = {
         ["content"] = "",
-        ["embeds"] = [
+        ["embeds"] = {{
             {
                 ["title"] =  snipeMessage,
                 ["color"] = 3399065,
                 ["fields"] = fields
-        }
-      ]
+            }
+        }}
     }
     local body = http:JSONEncode(data)
     local response = request({
