@@ -12,32 +12,6 @@ if not getgenv().a then
     end)
 end
 
-function SendMessageEMBED(url, embed)
-    local http = game:GetService("HttpService")
-    local headers = {
-        ["Content-Type"] = "application/json"
-    }
-    local headers = {
-        ["Content-Type"] = "application/json"
-    }
-    local data = {
-        ["embeds"] = {
-            {
-                ["title"] = embed.title,
-                ["color"] = embed.color,
-                ["fields"] = embed.fields
-            }
-        }
-    }
-    local body = http:JSONEncode(data)
-    local response = request({
-        Url = url,
-        Method = "POST",
-        Headers = headers,
-        Body = body
-    })
-end
-
 local function processListingInfo(uid, gems, item, version, shiny, amount, boughtFrom)
     print(uid, gems, item, version, shiny, amount, boughtFrom)
     print("BOUGHT FROM:", boughtFrom)
@@ -90,13 +64,27 @@ local function processListingInfo(uid, gems, item, version, shiny, amount, bough
             "value" = tostring(uid),
         }
     }
-
-    local embed = {
-        ["title"]: snipeMessage,
-        ["color"]: 5763719,
-        ["fields"] = fields
+    
+    local http = game:GetService("HttpService")
+    local headers = {
+        ["Content-Type"] = "application/json"
     }
-    SendMessageEMBED(getgenv.webhook, embed)
+    local data = {
+        ["embeds"]: [
+            {
+                ["title"] =  snipeMessage,
+                ["color"] = 3399065,
+                ["fields"] = fields
+        }
+      ]
+    }
+    local body = http:JSONEncode(data)
+    local response = request({
+        Url = getgenv().webhook,
+        Method = "POST",
+        Headers = headers,
+        Body = body
+    })
 end
 
 local function checklisting(uid, gems, item, version, shiny, amount, username, playerid)
