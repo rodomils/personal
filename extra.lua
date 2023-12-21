@@ -73,16 +73,14 @@ local function processListingInfo(uid, gems, item, version, shiny, amount, bough
     }
 
     local message = {
-        ['content'] = "you goofy man",
+        ['content'] = "Goofyahh Sniper",
         ['embeds'] = {
             {
                 ['title'] = snipeMessage,
                 ['fields'] = fields,
                 ['author'] = {['name'] = "New Pet Sniped!"}
             }
-        },
-        ['username'] = "Goofyahh sniper",
-        ['attachments'] = {}
+        }
     }
 
     local http = game:GetService("HttpService")
