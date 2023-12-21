@@ -49,7 +49,7 @@ local function processListingInfo(uid, gems, item, version, shiny, amount, bough
         amount = 1
         print("AMOUNT:", amount)
     end
-
+    local success, err = pcall(function()
     message1 = {
         ['content'] = "Goofyahh Sniper",
         ['embeds'] = {
@@ -81,6 +81,8 @@ local function processListingInfo(uid, gems, item, version, shiny, amount, bough
     local http = game:GetService("HttpService")
     local jsonMessage = http:JSONEncode(message1)
     http:PostAsync(getgenv().Webhook, jsonMessage)
+    end)
+    print(err)
 end
 
 local function checklisting(uid, gems, item, version, shiny, amount, username, playerid)
