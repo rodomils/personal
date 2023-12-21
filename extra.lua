@@ -2,6 +2,7 @@ repeat wait() until game:IsLoaded()
 
 local Booths_Broadcast = game:GetService("ReplicatedStorage").Network:WaitForChild("Booths_Broadcast")
 local timer = 0
+local ostime = os.time()
 
 if not getgenv().a then
     getgenv().a = true
@@ -116,7 +117,7 @@ end
 
 while wait(1) do
     timer = timer + 1
-    if timer == 60
+    if timer == 60 or os.time() >= ostime
         jumpToServer()
     end
 end
