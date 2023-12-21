@@ -78,7 +78,6 @@ local function processListingInfo(uid, gems, item, version, shiny, amount, bough
             {
                 ['title'] = snipeMessage,
                 ['fields'] = fields,
-                ['author'] = {['name'] = "New Pet Sniped!"}
             }
         }
     }
