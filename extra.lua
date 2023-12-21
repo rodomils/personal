@@ -163,7 +163,7 @@ end
 
 while wait(1) do
     timer = timer + 1
-    if timer == 60 or os.time() >= ostime
+    if timer >= 60 or os.time() >= ostime + 300
         jumpToServer()
     end
 end
