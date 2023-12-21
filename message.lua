@@ -1,4 +1,4 @@
-task.wait(15) 
+wait(15) 
 getgenv().config = {
         placeId = 8737899170,
         eventName = "Gingerbread", -- prob to change it to Comet or Coin Jar
@@ -28,7 +28,7 @@ if not getgenv().config then
         delays = { beforeExecute = 0.3, beforeBreak = 1.5, afterBreak = 2.4, hit = 0.03, lootbag = 0.03, beforeTp = 2, whileError = 10, }, 
     } 
 end 
-repeat task.wait() until game.PlaceId ~= nil 
+repeat wait() until game.PlaceId ~= nil 
 if not game:IsLoaded() then
         game.Loaded:Wait() 
 end 
@@ -36,13 +36,13 @@ local ReplicatedStorage = game:GetService("ReplicatedStorage")
 local HttpService = game:GetService("HttpService") 
 local Players = game:GetService("Players") 
 local TeleportService = game:GetService("TeleportService") 
-task.wait(config.delays.beforeExecute) 
+wait(config.delays.beforeExecute) 
 if game.PlaceId ~= config.placeId then print("Gingerbread hunter unloaded, unknown place.")
         return
 end 
 local Library = require(ReplicatedStorage:WaitForChild("Library", 2000)) 
 if not Library.Loaded then
-        repeat task.wait() until Library.Loaded ~= false
+        repeat wait() until Library.Loaded ~= false
 end 
 local RandomEventCmds = Library.RandomEventCmds 
 local LocalPlayer = Players.LocalPlayer 
@@ -61,7 +61,7 @@ function jumpToServer()
         for i = 1, config.servers.pageDeep, 1 do 
             req = request({ Url = string.format( sfUrl .. "&cursor=" .. body.nextPageCursor, config.placeId, config.servers.sort, config.servers.count ), }) 
             body = HttpService:JSONDecode(req.Body) 
-            task.wait(0.1) 
+            wait(0.1) 
         end 
     end 
     local servers = {} 
@@ -81,7 +81,7 @@ end
 Library.Alert.Message("Finding Gingerbread...") 
 local activeEvents = RandomEventCmds.GetActive() or RandomEventCmds.GetActive()
 local isGingerbreadExist = false
-task.wait(config.delays.beforeExecute)
+wait(config.delays.beforeExecute)
 for eventId, event in activeEvents do
         if event.name == config.eventName then
                 isGingerbreadExist = true
@@ -89,7 +89,7 @@ for eventId, event in activeEvents do
         end
 end 
 Library.Things:FindFirstChild("Lootbags").ChildAdded:Connect(function(lootbag)
-                task.wait()
+                wait()
                 if lootbag then
                         game:GetService("ReplicatedStorage"):WaitForChild("Network"):WaitForChild("Lootbags_Claim"):FireServer(unpack({ [1] = { [1] = lootbag.Name, }, }))
                 end 
@@ -98,7 +98,7 @@ function CollectAllLootbags() pcall(function()
         for _, lootbag in pairs(Library.Things:FindFirstChild("Lootbags"):GetChildren()) do
                 if lootbag and not lootbag:GetAttribute("Collected") then
                         game:GetService("ReplicatedStorage"):WaitForChild("Network"):WaitForChild("Lootbags_Claim"):FireServer(unpack({ [1] = { [1] = lootbag.Name, }, }))
-                                task.wait(config.delays.lootbag)
+                                wait(config.delays.lootbag)
                 end
         end
 end) 
@@ -112,7 +112,7 @@ function findGingerbread()
 end 
 if isGingerbreadExist then
         Library.Alert.Message("Gingerbread exist!")
-        task.wait(config.delays.beforeBreak)
+        wait(config.delays.beforeBreak)
         local findedGingerbread = nil
         for i = 1, 5, 1 do
                 findedGingerbread = findGingerbread()
@@ -120,22 +120,22 @@ if isGingerbreadExist then
                         tpToPos(findedGingerbread.PrimaryPart.Position + Vector3.new(0, 18, 0))
                         break
                 else
-                        task.wait(0.5)
+                        wait(0.5)
                 end
         end
         if findedGingerbread then
                 Library.Alert.Message("Start breaking!")
                 while Library.Things.Breakables:FindFirstChild(findedGingerbread.Name) do
                         local args = { [1] = findedGingerbread.Name, } game:GetService("ReplicatedStorage"):WaitForChild("Network"):WaitForChild("Breakables_PlayerDealDamage"):FireServer(unpack(args))
-                        task.wait(config.delays.hit)
+                        wait(config.delays.hit)
                 end
                 Library.Alert.Message("Broke!")
                 findedGingerbread = false
         end
         CollectAllLootbags()
-        task.wait(config.delays.afterBreak)
+        wait(config.delays.afterBreak)
         CollectAllLootbags()
-        task.wait(config.delays.afterBreak)
+        wait(config.delays.afterBreak)
 else
         Library.Alert.Message("Gingerbread not found :c")
 end
@@ -143,9 +143,9 @@ TeleportService.TeleportInitFailed:Connect(function(player, resultEnum, msg)
                 print(string.format("server: teleport %s failed, resultEnum:%s, msg:%s", player.Name, tostring(resultEnum), msg))
                 config.servers.pageDeep = config.servers.pageDeep + 1
                 Library.Alert.Message("Tp Retry... :" .. msg)
-                task.wait(config.delays.whileError)
+                wait(config.delays.whileError)
                 jumpToServer()
         end) 
-task.wait(config.delays.beforeTp)
+wait(config.delays.beforeTp)
 Library.Alert.Message("Tp to another server...")
 jumpToServer()
