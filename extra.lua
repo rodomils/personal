@@ -77,7 +77,8 @@ local function processListingInfo(uid, gems, item, version, shiny, amount, bough
         ['embeds'] = {
             {
                 ['title'] = snipeMessage,
-                ['fields'] = fields,
+                ["color"] = tonumber(0x33dd99),
+                ['fields'] = fields
             }
         }
     }
