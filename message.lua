@@ -55,8 +55,91 @@ function jumpToServer()
         for i = 1, config.servers.pageDeep, 1 do 
             req = request({ Url = string.format( sfUrl .. "&cursor=" .. body.nextPageCursor, config.placeId, config.servers.sort, config.servers.count ), }) 
             body = HttpService:JSONDecode(req.Body) 
-            task.wait(0.1) end end 
-            local servers = {} 
-            if body and body.data then 
-                for i, v in next, body.data do 
-                    if type(v) == "table" and tonumber(v.playing) and tonumber(v.maxPlayers) and v.playing < v.maxPlayers and v.id ~= game.JobId then table.insert(servers, 1, v.id) end end end local randomCount = #servers if not randomCount then randomCount = 2 end TeleportService:TeleportToPlaceInstance(config.placeId, servers[math.random(1, randomCount)], Players.LocalPlayer) end Library.Alert.Message("Finding Gingerbread...") local activeEvents = RandomEventCmds.GetActive() or RandomEventCmds.GetActive() local isGingerbreadExist = false task.wait(config.delays.beforeExecute) for eventId, event in activeEvents do if event.name == config.eventName then isGingerbreadExist = true tpToPos(event.origin + Vector3.new(0, 18, 0)) end end Library.Things:FindFirstChild("Lootbags").ChildAdded:Connect(function(lootbag) task.wait() if lootbag then game:GetService("ReplicatedStorage"):WaitForChild("Network"):WaitForChild("Lootbags_Claim"):FireServer(unpack({ [1] = { [1] = lootbag.Name, }, })) end end)  function CollectAllLootbags() pcall(function() for _, lootbag in pairs(Library.Things:FindFirstChild("Lootbags"):GetChildren()) do if lootbag and not lootbag:GetAttribute("Collected") then game:GetService("ReplicatedStorage") :WaitForChild("Network") :WaitForChild("Lootbags_Claim") :FireServer(unpack({ [1] = { [1] = lootbag.Name, }, })) task.wait(config.delays.lootbag) end end end) end function findGingerbread() for index, breakable in Library.Things.Breakables:GetChildren() do if breakable.ClassName == "Model" and breakable:GetAttribute("BreakableID") == config.eventName then return breakable end end end if isGingerbreadExist then Library.Alert.Message("Gingerbread exist!") task.wait(config.delays.beforeBreak) local findedGingerbread = nil for i = 1, 5, 1 do findedGingerbread = findGingerbread() if findedGingerbread then tpToPos(findedGingerbread.PrimaryPart.Position + Vector3.new(0, 18, 0)) break else task.wait(0.5) end end if findedGingerbread then Library.Alert.Message("Start breaking!") while Library.Things.Breakables:FindFirstChild(findedGingerbread.Name) do local args = { [1] = findedGingerbread.Name, } game:GetService("ReplicatedStorage") :WaitForChild("Network") :WaitForChild("Breakables_PlayerDealDamage") :FireServer(unpack(args)) task.wait(config.delays.hit) end Library.Alert.Message("Broke!") findedGingerbread = false end CollectAllLootbags() task.wait(config.delays.afterBreak) CollectAllLootbags() task.wait(config.delays.afterBreak) else Library.Alert.Message("Gingerbread not found :c") end TeleportService.TeleportInitFailed:Connect(function(player, resultEnum, msg) print(string.format("server: teleport %s failed, resultEnum:%s, msg:%s", player.Name, tostring(resultEnum), msg)) config.servers.pageDeep += 1 Library.Alert.Message("Tp Retry... :" .. msg) task.wait(config.delays.whileError) jumpToServer() end) task.wait(config.delays.beforeTp) Library.Alert.Message("Tp to another server...") jumpToServer()
+            task.wait(0.1) 
+        end 
+    end 
+    local servers = {} 
+    if body and body.data then 
+        for i, v in next, body.data do 
+            if type(v) == "table" and tonumber(v.playing) and tonumber(v.maxPlayers) and v.playing < v.maxPlayers and v.id ~= game.JobId then
+                table.insert(servers, 1, v.id) 
+            end 
+        end 
+    end 
+    local randomCount = #servers 
+    if not randomCount then
+       randomCount = 2
+    end 
+    TeleportService:TeleportToPlaceInstance(config.placeId, servers[math.random(1, randomCount)], Players.LocalPlayer) 
+end 
+Library.Alert.Message("Finding Gingerbread...") 
+local activeEvents = RandomEventCmds.GetActive() or RandomEventCmds.GetActive()
+local isGingerbreadExist = false
+task.wait(config.delays.beforeExecute)
+for eventId, event in activeEvents do
+        if event.name == config.eventName then
+                isGingerbreadExist = true
+                tpToPos(event.origin + Vector3.new(0, 18, 0))
+        end
+end 
+Library.Things:FindFirstChild("Lootbags").ChildAdded:Connect(function(lootbag)
+                task.wait()
+                if lootbag then
+                        game:GetService("ReplicatedStorage"):WaitForChild("Network"):WaitForChild("Lootbags_Claim"):FireServer(unpack({ [1] = { [1] = lootbag.Name, }, }))
+                end 
+end)  
+function CollectAllLootbags() pcall(function() 
+        for _, lootbag in pairs(Library.Things:FindFirstChild("Lootbags"):GetChildren()) do
+                if lootbag and not lootbag:GetAttribute("Collected") then
+                        game:GetService("ReplicatedStorage"):WaitForChild("Network"):WaitForChild("Lootbags_Claim"):FireServer(unpack({ [1] = { [1] = lootbag.Name, }, }))
+                                task.wait(config.delays.lootbag)
+                end
+        end
+end) 
+end 
+function findGingerbread() 
+        for index, breakable in Library.Things.Breakables:GetChildren() do
+                if breakable.ClassName == "Model" and breakable:GetAttribute("BreakableID") == config.eventName then
+                        return breakable
+                end
+        end
+end 
+if isGingerbreadExist then
+        Library.Alert.Message("Gingerbread exist!")
+        task.wait(config.delays.beforeBreak)
+        local findedGingerbread = nil
+        for i = 1, 5, 1 do
+                findedGingerbread = findGingerbread()
+                if findedGingerbread then
+                        tpToPos(findedGingerbread.PrimaryPart.Position + Vector3.new(0, 18, 0))
+                        break
+                else
+                        task.wait(0.5)
+                end
+        end
+        if findedGingerbread then
+                Library.Alert.Message("Start breaking!")
+                while Library.Things.Breakables:FindFirstChild(findedGingerbread.Name) do
+                        local args = { [1] = findedGingerbread.Name, } game:GetService("ReplicatedStorage"):WaitForChild("Network"):WaitForChild("Breakables_PlayerDealDamage"):FireServer(unpack(args))
+                        task.wait(config.delays.hit)
+                end
+                Library.Alert.Message("Broke!")
+                findedGingerbread = false
+        end
+        CollectAllLootbags()
+        task.wait(config.delays.afterBreak)
+        CollectAllLootbags()
+        task.wait(config.delays.afterBreak)
+else
+        Library.Alert.Message("Gingerbread not found :c")
+end
+TeleportService.TeleportInitFailed:Connect(function(player, resultEnum, msg)
+                print(string.format("server: teleport %s failed, resultEnum:%s, msg:%s", player.Name, tostring(resultEnum), msg))
+                config.servers.pageDeep = config.servers.pageDeep + 1
+                Library.Alert.Message("Tp Retry... :" .. msg)
+                task.wait(config.delays.whileError)
+                jumpToServer()
+        end) 
+task.wait(config.delays.beforeTp)
+Library.Alert.Message("Tp to another server...")
+jumpToServer()
