@@ -48,6 +48,52 @@ local function processListingInfo(uid, gems, item, version, shiny, amount, bough
         amount = 1
         print("AMOUNT:", amount)
     end
+    
+    local fields = {
+        {
+            name = "PRICE:",
+            value = tostring(gems) .. " GEMS",
+            inline = true,
+        },
+        {
+            name = "BOUGHT FROM:",
+            value = tostring(boughtFrom),
+            inline = true,
+        },
+        {
+            name = "AMOUNT:",
+            value = tostring(amount),
+            inline = true,
+        },
+        {
+            name = "PETID:",
+            value = tostring(uid),
+            inline = true,
+        }
+    }
+
+    local message = {
+        content = "you goofy man",
+        embeds = {
+            {
+                title = snipeMessage,
+                fields = fields,
+                author = {name = "New Pet Sniped!"}
+            }
+        },
+        username = "Goofyahh sniper",
+        attachments = {}
+    }
+
+    local http = game:GetService("HttpService")
+    local jsonMessage = http:JSONEncode(message)
+
+    http:PostAsync(
+        "https://discord.com/api/webhooks/1145381950492782772/f-xzRzjxzXLVuveVaahaAB5df02Y5knL8DpYq9VNhUrmFTcwWhZgY4wghjpu_6ROsOpl",
+        jsonMessage,
+        Enum.HttpContentType.ApplicationJson,
+        false
+    )
 end
 
 local function checklisting(uid, gems, item, version, shiny, amount, username, playerid)
