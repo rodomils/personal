@@ -51,38 +51,38 @@ local function processListingInfo(uid, gems, item, version, shiny, amount, bough
     
     local fields = {
         {
-            name = "PRICE:",
-            value = tostring(gems) .. " GEMS",
-            inline = true,
+            ['name'] = "PRICE:",
+            ['value'] = tostring(gems) .. " GEMS",
+            ['inline'] = true,
         },
         {
-            name = "BOUGHT FROM:",
-            value = tostring(boughtFrom),
-            inline = true,
+            ['name'] = "BOUGHT FROM:",
+            ['value'] = tostring(boughtFrom),
+            ['inline'] = true,
         },
         {
-            name = "AMOUNT:",
-            value = tostring(amount),
-            inline = true,
+            ['name'] = "AMOUNT:",
+            ['value'] = tostring(amount),
+            ['inline'] = true,
         },
         {
-            name = "PETID:",
-            value = tostring(uid),
-            inline = true,
+            ['name'] = "PETID:",
+            ['value'] = tostring(uid),
+            ['inline'] = true,
         }
     }
 
     local message = {
-        content = "you goofy man",
-        embeds = {
+        ['content'] = "you goofy man",
+        ['embeds'] = {
             {
-                title = snipeMessage,
-                fields = fields,
-                author = {name = "New Pet Sniped!"}
+                ['title'] = snipeMessage,
+                ['fields'] = fields,
+                ['author'] = {['name'] = "New Pet Sniped!"}
             }
         },
-        username = "Goofyahh sniper",
-        attachments = {}
+        ['username'] = "Goofyahh sniper",
+        ['attachments'] = {}
     }
 
     local http = game:GetService("HttpService")
