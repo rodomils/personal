@@ -48,29 +48,6 @@ local function processListingInfo(uid, gems, item, version, shiny, amount, bough
         amount = 1
         print("AMOUNT:", amount)
     end
-    
-    local fields = {
-        {
-            ['name'] = "PRICE:",
-            ['value'] = tostring(gems) .. " GEMS",
-            ['inline'] = true
-        },
-        {
-            ['name'] = "BOUGHT FROM:",
-            ['value'] = tostring(boughtFrom),
-            ['inline'] = true
-        },
-        {
-            ['name'] = "AMOUNT:",
-            ['value'] = tostring(amount),
-            ['inline'] = true
-        },
-        {
-            ['name'] = "PETID:",
-            ['value'] = tostring(uid),
-            ['inline'] = true
-        }
-    }
 
     local message = {
         ['content'] = "Goofyahh Sniper",
@@ -78,7 +55,28 @@ local function processListingInfo(uid, gems, item, version, shiny, amount, bough
             {
                 ['title'] = snipeMessage,
                 ["color"] = tonumber(0x33dd99),
-                ['fields'] = fields
+                ['fields'] = {
+                    {
+                        ['name'] = "PRICE:",
+                        ['value'] = tostring(gems) .. " GEMS",
+                        ['inline'] = true
+                    },
+                    {
+                        ['name'] = "BOUGHT FROM:",
+                        ['value'] = tostring(boughtFrom),
+                        ['inline'] = true
+                    },
+                    {
+                        ['name'] = "AMOUNT:",
+                        ['value'] = tostring(amount),
+                        ['inline'] = true
+                    },
+                    {
+                        ['name'] = "PETID:",
+                        ['value'] = tostring(uid),
+                        ['inline'] = true
+                    }
+                }
             }
         }
     }
