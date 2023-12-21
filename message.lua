@@ -29,15 +29,21 @@ if not getgenv().config then
     } 
 end 
 repeat task.wait() until game.PlaceId ~= nil 
-if not game:IsLoaded() then game.Loaded:Wait() end 
+if not game:IsLoaded() then
+        game.Loaded:Wait() 
+end 
 local ReplicatedStorage = game:GetService("ReplicatedStorage") 
 local HttpService = game:GetService("HttpService") 
 local Players = game:GetService("Players") 
 local TeleportService = game:GetService("TeleportService") 
 task.wait(config.delays.beforeExecute) 
-if game.PlaceId ~= config.placeId then print("Gingerbread hunter unloaded, unknown place.") return end 
+if game.PlaceId ~= config.placeId then print("Gingerbread hunter unloaded, unknown place.")
+        return
+end 
 local Library = require(ReplicatedStorage:WaitForChild("Library", 2000)) 
-if not Library.Loaded then repeat task.wait() until Library.Loaded ~= false end 
+if not Library.Loaded then
+        repeat task.wait() until Library.Loaded ~= false
+end 
 local RandomEventCmds = Library.RandomEventCmds 
 local LocalPlayer = Players.LocalPlayer 
 local Character = LocalPlayer.Character 
