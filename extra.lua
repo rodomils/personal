@@ -1,6 +1,7 @@
 repeat wait() until game:IsLoaded()
 
 local Booths_Broadcast = game:GetService("ReplicatedStorage").Network:WaitForChild("Booths_Broadcast")
+local timer = 0
 
 if not getgenv().a then
     getgenv().a = true
@@ -13,7 +14,8 @@ if not getgenv().a then
 end
 
 local function processListingInfo(uid, gems, item, version, shiny, amount, boughtFrom)
-        print(uid, gems, item, version, shiny, amount, boughtFrom)
+    timer = 0
+    print(uid, gems, item, version, shiny, amount, boughtFrom)
     print("BOUGHT FROM:", boughtFrom)
     print("UID:", uid)
     print("GEMS:", gems)
@@ -112,9 +114,9 @@ local function jumpToServer()
     game:GetService("TeleportService"):TeleportToPlaceInstance(15502339080, servers[math.random(1, randomCount)], game:GetService("Players").LocalPlayer) 
 end
 
-local function chk()
-    wait(300)
-    jumpToServer()
+while wait(1) do
+    timer = timer + 1
+    if timer == 60
+        jumpToServer()
+    end
 end
-
-chk()
