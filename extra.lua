@@ -3,6 +3,7 @@ repeat wait() until game:IsLoaded()
 local Booths_Broadcast = game:GetService("ReplicatedStorage").Network:WaitForChild("Booths_Broadcast")
 local timer = 0
 local ostime = os.time()
+local message1 = {}
 
 if not getgenv().a then
     getgenv().a = true
@@ -49,7 +50,7 @@ local function processListingInfo(uid, gems, item, version, shiny, amount, bough
         print("AMOUNT:", amount)
     end
 
-    local message1 = {
+    message1 = {
         ['content'] = "Goofyahh Sniper",
         ['embeds'] = {
             {
