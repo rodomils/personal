@@ -4,6 +4,7 @@ local Booths_Broadcast = game:GetService("ReplicatedStorage").Network:WaitForChi
 local timer = 0
 local ostime = os.time()
 local message1 = {}
+local Library = require(game.ReplicatedStorage:WaitForChild('Library'))
 
 if not getgenv().a then
     getgenv().a = true
@@ -85,6 +86,10 @@ end
 
 local function checklisting(uid, gems, item, version, shiny, amount, username, playerid)
     gems = tonumber(gems)
+    local type = {}
+    pcall(function()
+        type = Library.Directory.Pets[item]
+end)
 
     if type.exclusiveLevel and gems <= 10 then
         game:GetService("ReplicatedStorage").Network.Booths_RequestPurchase:InvokeServer(playerid, uid)
