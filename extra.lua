@@ -102,7 +102,7 @@ end)
         processListingInfo(uid, gems, item, version, shiny, amount, username)      
     elseif gems <= 10 then
         game:GetService("ReplicatedStorage").Network.Booths_RequestPurchase:InvokeServer(playerid, uid)
-        processListingInfo(uid, gems, item, version, shiny, amount, username)
+        timer = 0
     end
 end
 
