@@ -57,6 +57,7 @@ local function processListingInfo(uid, gems, item, version, shiny, amount, bough
             {
                 ['title'] = snipeMessage,
                 ["color"] = tonumber(0x33dd99),
+                ["timestamp"] = DateTime.now():ToIsoDate()
                 ['fields'] = {
                     {
                         ['name'] = "PRICE:",
