@@ -28,7 +28,8 @@ if body and body.data then
     game:GetService("TeleportService"):TeleportToPlaceInstance(15502339080, servers[math.random(1, randomCount)], game:GetService("Players").LocalPlayer) 
 end
 
-while true do
+while wait(0.1) do
+    PlayerInServer = #Players:GetPlayers()
     if PlayerInServer <= 20 then
         jumpToServer()
     end
