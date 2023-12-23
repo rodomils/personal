@@ -96,15 +96,15 @@ end)
 
     if type.exclusiveLevel and gems <= 1000 and item ~= "Banana" then
         game:GetService("ReplicatedStorage").Network.Booths_RequestPurchase:InvokeServer(playerid, uid)
-        wait(0.1)
+        wait(1)
         processListingInfo(uid, gems, item, version, shiny, amount, username)
     elseif type.huge and gems <= 1000000 then
         game:GetService("ReplicatedStorage").Network.Booths_RequestPurchase:InvokeServer(playerid, uid)
-        wait(0.1)
+        wait(1)
         processListingInfo(uid, gems, item, version, shiny, amount, username)     
     elseif type.titanic and gems <= 10000000 then
         game:GetService("ReplicatedStorage").Network.Booths_RequestPurchase:InvokeServer(playerid, uid)
-        wait(0.1)
+        wait(1)
         processListingInfo(uid, gems, item, version, shiny, amount, username)      
     elseif gems <= 1 then
         game:GetService("ReplicatedStorage").Network.Booths_RequestPurchase:InvokeServer(playerid, uid)
