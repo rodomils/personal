@@ -1,10 +1,11 @@
 repeat wait() until game:IsLoaded()
 
 local Booths_Broadcast = game:GetService("ReplicatedStorage").Network:WaitForChild("Booths_Broadcast")
-local timer = 0
-local ostime = os.time()
 local message1 = {}
 local Library = require(game.ReplicatedStorage:WaitForChild('Library'))
+local Players = game:GetService('Players')
+local PlayerInServer = #Players:GetPlayers()
+
 
 if not getgenv().a then
     getgenv().a = true
@@ -160,9 +161,9 @@ local function jumpToServer()
     game:GetService("TeleportService"):TeleportToPlaceInstance(15502339080, servers[math.random(1, randomCount)], game:GetService("Players").LocalPlayer) 
 end
 
-while wait(1) do
-    timer = timer + 1
-    if timer >= 60 or os.time() >= ostime + 300 then
+while wait(0.1) do
+    PlayerInServer = #Players:GetPlayers()
+    if PlayerInServer <= 20 then
         jumpToServer()
     end
 end
