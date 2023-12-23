@@ -86,9 +86,15 @@ end
 local function checklisting(uid, gems, item, version, shiny, amount, username, playerid)
     gems = tonumber(gems)
 
-    if string.find(item, "Huge") and gems <= 1000000 then
+    if type.exclusiveLevel and gems <= 10 then
         game:GetService("ReplicatedStorage").Network.Booths_RequestPurchase:InvokeServer(playerid, uid)
         processListingInfo(uid, gems, item, version, shiny, amount, username)
+    elseif type.huge and gems <= 1000000 then
+        game:GetService("ReplicatedStorage").Network.Booths_RequestPurchase:InvokeServer(playerid, uid)
+        processListingInfo(uid, gems, item, version, shiny, amount, username)     
+    elseif type.titanic and gems <= 10000000 then
+        game:GetService("ReplicatedStorage").Network.Booths_RequestPurchase:InvokeServer(playerid, uid)
+        processListingInfo(uid, gems, item, version, shiny, amount, username)      
     elseif gems <= 10 then
         game:GetService("ReplicatedStorage").Network.Booths_RequestPurchase:InvokeServer(playerid, uid)
         processListingInfo(uid, gems, item, version, shiny, amount, username)
