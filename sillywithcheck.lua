@@ -1,5 +1,6 @@
 local Players = game:GetService('Players')
 local PlayerInServer = #Players:GetPlayers()
+local ostime = os.time()
 
 local function jumpToServer() 
 local sfUrl = "https://games.roblox.com/v1/games/%s/servers/Public?sortOrder=%s&limit=%s&excludeFullGames=true" 
@@ -30,7 +31,7 @@ end
 
 while wait(0.1) do
     PlayerInServer = #Players:GetPlayers()
-    if PlayerInServer <= 20 then
+    if PlayerInServer <= 20 or os.time() >= ostime + 900 then
         jumpToServer()
     end
 end
