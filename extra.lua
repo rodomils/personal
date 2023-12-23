@@ -18,7 +18,6 @@ if not getgenv().a then
 end
 
 local function processListingInfo(uid, gems, item, version, shiny, amount, boughtFrom)
-    timer = 0
     print(uid, gems, item, version, shiny, amount, boughtFrom)
     print("BOUGHT FROM:", boughtFrom)
     print("UID:", uid)
@@ -96,19 +95,15 @@ end)
 
     if type.exclusiveLevel and gems <= 1000 and item ~= "Banana" then
         game:GetService("ReplicatedStorage").Network.Booths_RequestPurchase:InvokeServer(playerid, uid)
-        wait(5)
         processListingInfo(uid, gems, item, version, shiny, amount, username)
     elseif type.huge and gems <= 1000000 then
         game:GetService("ReplicatedStorage").Network.Booths_RequestPurchase:InvokeServer(playerid, uid)
-        wait(5)
         processListingInfo(uid, gems, item, version, shiny, amount, username)     
     elseif type.titanic and gems <= 10000000 then
         game:GetService("ReplicatedStorage").Network.Booths_RequestPurchase:InvokeServer(playerid, uid)
-        wait(5)
         processListingInfo(uid, gems, item, version, shiny, amount, username)      
     elseif gems <= 1 then
         game:GetService("ReplicatedStorage").Network.Booths_RequestPurchase:InvokeServer(playerid, uid)
-        timer = 0
     end
 end
 
