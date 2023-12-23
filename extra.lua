@@ -2,7 +2,6 @@ repeat wait() until game:IsLoaded()
 
 local Booths_Broadcast = game:GetService("ReplicatedStorage").Network:WaitForChild("Booths_Broadcast")
 local message1 = {}
-local Library = require(game.ReplicatedStorage:WaitForChild('Library'))
 local Players = game:GetService('Players')
 local PlayerInServer = #Players:GetPlayers()
 local ostime = os.time()
@@ -88,6 +87,7 @@ local function processListingInfo(uid, gems, item, version, shiny, amount, bough
 end
 
 local function checklisting(uid, gems, item, version, shiny, amount, username, playerid)
+    local Library = require(game.ReplicatedStorage:WaitForChild('Library'))
     gems = tonumber(gems)
     local type = {}
     pcall(function()
