@@ -5,6 +5,7 @@ local message1 = {}
 local Library = require(game.ReplicatedStorage:WaitForChild('Library'))
 local Players = game:GetService('Players')
 local PlayerInServer = #Players:GetPlayers()
+local ostime = os.time()
 
 
 if not getgenv().a then
@@ -163,7 +164,7 @@ end
 
 while wait(0.1) do
     PlayerInServer = #Players:GetPlayers()
-    if PlayerInServer <= 20 then
+    if PlayerInServer < 20 or os.time() >= ostime + 900 then
         jumpToServer()
     end
 end
