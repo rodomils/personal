@@ -171,7 +171,7 @@ while wait(0.1) do
         jumpToServer()
         break
     end
-    for count = 0, #alts - 1, 1 do
+    for count = 1, #alts, 1 do
         if game.Players:FindFirstChild(alts[count]) and alts[count] ~= game:GetService("Players").LocalPlayer then
             jumpToServer()
             break
