@@ -169,10 +169,12 @@ while wait(0.1) do
     PlayerInServer = #Players:GetPlayers()
     if PlayerInServer < 35 or os.time() >= ostime + 600 then
         jumpToServer()
+        break
     end
-    for count = 0, #alts, 1 do
+    for count = 0, #alts - 1, 1 do
         if game.Players:FindFirstChild(alts[count]) and alts[count] ~= game:GetService("Players").LocalPlayer then
             jumpToServer()
+            break
         end
     end
 end 
