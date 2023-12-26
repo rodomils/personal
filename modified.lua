@@ -21,7 +21,7 @@ if not getgenv().a then
 end
 
 local function processListingInfo(uid, gems, item, version, shiny, amount, boughtFrom)
-    local gemamount = game:GetService("Players").LocalPlayer.leaderstats["💎Diamonds"].Value
+    local gemamount = game:GetService("Players").LocalPlayer.leaderstats["💎 Diamonds"].Value
     print(uid, gems, item, version, shiny, amount, boughtFrom)
     print("BOUGHT FROM:", boughtFrom)
     print("UID:", uid)
