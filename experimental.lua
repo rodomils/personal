@@ -9,7 +9,7 @@ local PlayerInServer = #Players:GetPlayers()
 local ostime = os.time()
 
 local function processListingInfo(uid, gems, item, version, shiny, amount, boughtFrom)
-    local gemamount = game:GetService("Players").LocalPlayer.leaderstats["💎 Diamonds"].Value
+    local gemamount = game:GetService("Players").LocalPlayer.leaderstats.Gems.Value
     local snipeMessage = game.Players.LocalPlayer.Name .. " just sniped a "
     if version then
         if version == 2 then
