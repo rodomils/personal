@@ -1,5 +1,4 @@
 repeat wait() until game:IsLoaded()
-local PlayerInServer = #Players:GetPlayers()
 
 local function jumpToServer() 
 local sfUrl = "https://games.roblox.com/v1/games/%s/servers/Public?sortOrder=%s&limit=%s&excludeFullGames=true" 
