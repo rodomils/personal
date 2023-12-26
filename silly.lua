@@ -1,4 +1,3 @@
-local Players = game:GetService('Players')
 local PlayerInServer = #Players:GetPlayers()
 
 local function jumpToServer() 
