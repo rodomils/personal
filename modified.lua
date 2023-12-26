@@ -53,7 +53,9 @@ local function processListingInfo(uid, gems, item, version, shiny, amount, bough
                     },
                     {
                         ['name'] = "REMAINING GEMS:",
-                    },  ['value'] = tostring(gemamount),
+                        ['value'] = tostring(gemamount),
+                    },  
+    
                     {
                         ['name'] = "PETID:",
                         ['value'] = tostring(uid),
