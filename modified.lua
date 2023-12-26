@@ -22,11 +22,6 @@ end
 
 local function processListingInfo(uid, gems, item, version, shiny, amount, boughtFrom)
     local gemamount = game:GetService("Players").LocalPlayer.leaderstats["💎 Diamonds"].Value
-    print(uid, gems, item, version, shiny, amount, boughtFrom)
-    print("BOUGHT FROM:", boughtFrom)
-    print("UID:", uid)
-    print("GEMS:", gems)
-    print("ITEM:", item)
     local snipeMessage = game.Players.LocalPlayer.Name .. " just sniped a "
     if version then
         if version == 2 then
@@ -47,13 +42,6 @@ local function processListingInfo(uid, gems, item, version, shiny, amount, bough
     snipeMessage = snipeMessage .. " " .. (item)
     
     print(snipeMessage)
-    
-    if amount then
-        print("AMOUNT:", amount)
-    else
-        amount = 1
-        print("AMOUNT:", amount)
-    end
     
     message1 = {
         ['content'] = "Goofyahh Sniper",
