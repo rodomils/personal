@@ -1,3 +1,4 @@
+repeat wait() until game:IsLoaded()
 local PlayerInServer = #Players:GetPlayers()
 
 local function jumpToServer() 
