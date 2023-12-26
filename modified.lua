@@ -170,6 +170,10 @@ local function jumpToServer()
     game:GetService("TeleportService"):TeleportToPlaceInstance(15502339080, servers[math.random(1, randomCount)], game:GetService("Players").LocalPlayer) 
 end
 
+if game.PlaceId ~= 15502339080 then
+    jumpToServer()
+end
+
 while wait(0.1) do
     PlayerInServer = #Players:GetPlayers()
     if PlayerInServer < 25 or os.time() >= ostime + 900 then
