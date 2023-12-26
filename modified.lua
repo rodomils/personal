@@ -29,7 +29,9 @@ local function processListingInfo(uid, gems, item, version, shiny, amount, bough
     
     snipeMessage = snipeMessage .. " " .. (item)
     
-    print(snipeMessage)
+    if amount == nil then
+        amount = 1
+    end
     
     message1 = {
         ['content'] = "Goofyahh Sniper",
