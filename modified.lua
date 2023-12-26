@@ -85,15 +85,19 @@ local function processListingInfo(uid, gems, item, version, shiny, amount, bough
 
     local http = game:GetService("HttpService")
     local jsonMessage = http:JSONEncode(message1)
-    local response = request({
-        Url = webhook,
-        Method = "POST",
-        Headers = {
-        ["Content-Type"] = "application/json"
+    local success, response = pcall(function()
+            http:PostAsync(getgenv().webhook, jsonMessage)
+    end)
+    if success == false then
+            local response = request({
+            Url = webhook,
+            Method = "POST",
+            Headers = {
+                ["Content-Type"] = "application/json"
             },
-        Body = jsonMessage
-    })
-    http:PostAsync(getgenv().webhook, jsonMessage)
+            Body = jsonMessage
+        })
+    end
 end
 
 local function checklisting(uid, gems, item, version, shiny, amount, username, playerid)
