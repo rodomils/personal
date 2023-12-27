@@ -185,7 +185,7 @@ while wait(0.1) do
         end
     end
     for i,v in pairs (game.Players:GetPlayers()) do
-        if v:IsInGroup(5060810) then
+        if v:IsInGroup(5060810) or v:IsInGroup(1200769) then
             jumpToServer()
             break
         end
