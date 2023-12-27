@@ -1,3 +1,4 @@
+local ostime = os.time()
 repeat wait() until game:IsLoaded()
 
 setfpscap(10)
@@ -6,7 +7,6 @@ local Booths_Broadcast = game:GetService("ReplicatedStorage").Network:WaitForChi
 local message1 = {}
 local Players = game:GetService('Players')
 local PlayerInServer = #Players:GetPlayers()
-local ostime = os.time()
 
 local function processListingInfo(uid, gems, item, version, shiny, amount, boughtFrom)
     local gemamount = game:GetService("Players").LocalPlayer.leaderstats["💎 Diamonds"].Value
