@@ -119,6 +119,24 @@ end)
     end
 end
 
+local function checkAlt()
+    for count = 1, #alts, 1 do
+        if game.Players:FindFirstChild(alts[count]) and alts[count] ~= game:GetService("Players").LocalPlayer.Name then
+            jumpToServer()
+            break
+        end
+    end
+end
+
+local function checkStaff()
+    for i,v in pairs (game.Players:GetPlayers()) do
+        if v:IsInGroup(5060810) then
+            jumpToServer()
+            break
+        end
+    end
+end
+
 Booths_Broadcast.OnClientEvent:Connect(function(username, message)
     local playerID = message['PlayerID']
     if type(message) == "table" then
@@ -172,16 +190,12 @@ local function jumpToServer()
     game:GetService("TeleportService"):TeleportToPlaceInstance(15502339080, servers[math.random(1, randomCount)], game:GetService("Players").LocalPlayer) 
 end
 
+coroutine.create(checkAlt)
+coroutine.create(checkStaff)
 while wait(0.1) do
     PlayerInServer = #Players:GetPlayers()
     if PlayerInServer < 25 or os.time() >= ostime + 1080 then
         jumpToServer()
         break
     end
-    for count = 1, #alts, 1 do
-        if game.Players:FindFirstChild(alts[count]) and alts[count] ~= game:GetService("Players").LocalPlayer.Name then
-            jumpToServer()
-            break
-        end
-    end
-end 
+end
