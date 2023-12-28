@@ -188,9 +188,9 @@ local function jumpToServer()
     end 
     local servers = {} 
     if body and body.data then 
-        for i = 1, #body.data do 
-            if type(i) == "table" and tonumber(i.playing) and tonumber(i.maxPlayers) and i.playing < i.maxPlayers and i.id ~= game.JobId then
-                table.insert(servers, 1, i.id)
+        for i = v in next, body.data do 
+            if type(v) == "table" and tonumber(v.playing) and tonumber(v.maxPlayers) and v.playing < v.maxPlayers and v.id ~= game.JobId then
+                table.insert(servers, v.id)
             end
         end
     end
