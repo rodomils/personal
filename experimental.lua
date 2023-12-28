@@ -187,7 +187,7 @@ local function jumpToServer()
 end
 
 game:GetService("RunService").Stepped:Connect(function()
-    PlayerInServer = #Players:GetPlayers()
+    PlayerInServer = #getPlayers
     if PlayerInServer < 25 or math.floor(os.clock() - osclock) >= math.random(900, 1200) then
         jumpToServer()
     end
@@ -197,7 +197,7 @@ game:GetService("RunService").Stepped:Connect(function()
         end
     end
     for i = 1, PlayerInServer do
-        if v:IsInGroup(5060810) or v:IsInGroup(1200769) then
+        if getPlayers[i]:IsInGroup(5060810) or getPlayers[i]:IsInGroup(1200769) then
             jumpToServer()
         end
     end
