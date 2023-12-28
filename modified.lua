@@ -1,4 +1,4 @@
-local ostime = os.time()
+local osclock = os.clock()
 repeat wait() until game:IsLoaded()
 
 setfpscap(10)
@@ -181,7 +181,7 @@ end
 
 while wait(0.5) do
     PlayerInServer = #Players:GetPlayers()
-    if PlayerInServer < 25 or os.time() >= ostime + 900 then
+    if PlayerInServer < 25 or os.clock() >= osclock + 900 then
         jumpToServer()
         break
     end
