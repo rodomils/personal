@@ -187,7 +187,7 @@ end
 
 while wait(0.5) do
     PlayerInServer = #Players:GetPlayers()
-    if PlayerInServer < 25 or math.floor(os.clock() - osclock) >= 900 then
+    if PlayerInServer < 25 or math.floor(os.clock() - osclock) >= math.random(900, 1200) then
         jumpToServer()
     end
     for count = 1, #alts, 1 do
