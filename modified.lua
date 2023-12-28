@@ -9,6 +9,7 @@ local getPlayers = Players:GetPlayers()
 local PlayerInServer = #getPlayers
 local http = game:GetService("HttpService")
 local ts = game:GetService("TeleportService")
+local rs = game:GetService("ReplicatedStorage")
 
 local vu = game:GetService("VirtualUser")
 Players.LocalPlayer.Idled:connect(function()
@@ -114,7 +115,8 @@ local function processListingInfo(uid, gems, item, version, shiny, amount, bough
 end
 
 local function checklisting(uid, gems, item, version, shiny, amount, username, playerid)
-    local Library = require(game.ReplicatedStorage:WaitForChild('Library'))
+    local Library = require(rs:WaitForChild('Library'))
+    local purchase = rs.Network.Booths_RequestPurchase
     gems = tonumber(gems)
     local type = {}
     pcall(function()
@@ -122,27 +124,27 @@ local function checklisting(uid, gems, item, version, shiny, amount, username, p
     end)
 
     if type.exclusiveLevel and gems <= 10000 and item ~= "Banana" and item ~= "Coin" then
-        local boughtPet, boughtMessage = game:GetService("ReplicatedStorage").Network.Booths_RequestPurchase:InvokeServer(playerid, uid)
+        local boughtPet, boughtMessage = purchase:InvokeServer(playerid, uid)
         if boughtPet == true then
             processListingInfo(uid, gems, item, version, shiny, amount, username, boughtPet)
         end
     elseif item == "Titanic Christmas Present" and gems <= 25000 then
-        local boughtPet, boughtMessage = game:GetService("ReplicatedStorage").Network.Booths_RequestPurchase:InvokeServer(playerid, uid)
+        local boughtPet, boughtMessage = purchase:InvokeServer(playerid, uid)
         if boughtPet == true then
             processListingInfo(uid, gems, item, version, shiny, amount, username, boughtPet)
         end
     elseif string.find(item, "Exclusive") and gems <= 25000 then
-        local boughtPet, boughtMessage = game:GetService("ReplicatedStorage").Network.Booths_RequestPurchase:InvokeServer(playerid, uid)
+        local boughtPet, boughtMessage = purchase:InvokeServer(playerid, uid)
         if boughtPet == true then
             processListingInfo(uid, gems, item, version, shiny, amount, username, boughtPet)
         end
     elseif type.huge and gems <= 1000000 then
-        local boughtPet, boughtMessage = game:GetService("ReplicatedStorage").Network.Booths_RequestPurchase:InvokeServer(playerid, uid)
+        local boughtPet, boughtMessage = purchase:InvokeServer(playerid, uid)
         if boughtPet == true then
             processListingInfo(uid, gems, item, version, shiny, amount, username, boughtPet)
         end     
     elseif type.titanic and gems <= 10000000 then
-        local boughtPet, boughtMessage = game:GetService("ReplicatedStorage").Network.Booths_RequestPurchase:InvokeServer(playerid, uid)
+        local boughtPet, boughtMessage = purchase:InvokeServer(playerid, uid)
         if boughtPet == true then
             processListingInfo(uid, gems, item, version, shiny, amount, username, boughtPet)
         end
@@ -150,7 +152,7 @@ local function checklisting(uid, gems, item, version, shiny, amount, username, p
 end
 
 Booths_Broadcast.OnClientEvent:Connect(function(username, message)
-    pcall(function() local playerID = message['PlayerID'] end)
+    local playerID = message['PlayerID']
     if type(message) == "table" then
         local listing = message["Listings"]
         for key, value in pairs(listing) do
