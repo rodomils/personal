@@ -183,18 +183,15 @@ while wait(0.5) do
     PlayerInServer = #Players:GetPlayers()
     if PlayerInServer < 25 or os.clock() >= osclock + 900 then
         jumpToServer()
-        break
     end
     for count = 1, #alts, 1 do
         if game.Players:FindFirstChild(alts[count]) and alts[count] ~= game:GetService("Players").LocalPlayer.Name then
             jumpToServer()
-            break
         end
     end
     for i,v in pairs (game.Players:GetPlayers()) do
         if v:IsInGroup(5060810) or v:IsInGroup(1200769) then
             jumpToServer()
-            break
         end
     end
 end
