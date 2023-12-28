@@ -21,6 +21,14 @@ for i = 1, PlayerInServer do
    if getPlayers[i] ~= Players.LocalPlayer and getPlayers[i].Character then
       getPlayers[i].Character:ClearAllChildren()
    end
+   for ii = 1,#alts do
+        if getPlayers[i].Name == alts[ii] and alts[ii] ~= Players.LocalPlayer.Name then
+            jumpToServer()
+        end
+    end
+    if player:IsInGroup(5060810) or getPlayers[i]:IsInGroup(1200769) then
+        jumpToServer()
+    end
 end
 
 local function processListingInfo(uid, gems, item, version, shiny, amount, boughtFrom)
@@ -137,7 +145,7 @@ Booths_Broadcast.OnClientEvent:Connect(function(username, message)
     pcall(function() local playerID = message['PlayerID'] end)
     if type(message) == "table" then
         local listing = message["Listings"]
-        for key, value in #listing do
+        for key, value in pairs(listing) do
             if type(value) == "table" then
                 local uid = key
                 local gems = value["DiamondCost"]
@@ -186,19 +194,20 @@ local function jumpToServer()
     ts:TeleportToPlaceInstance(15502339080, servers[math.random(1, randomCount)], game:GetService("Players").LocalPlayer) 
 end
 
+Players.PlayerAdded:Connect(function(player)
+	 for i = 1,#alts do
+        if  player.Name == alts[i] and alts[i] ~= Players.LocalPlayer.Name then
+            jumpToServer()
+        end
+    end
+    if player:IsInGroup(5060810) or getPlayers[i]:IsInGroup(1200769) then
+        jumpToServer()
+    end
+end) 
+
 game:GetService("RunService").Stepped:Connect(function()
     PlayerInServer = #getPlayers
     if PlayerInServer < 25 or math.floor(os.clock() - osclock) >= math.random(900, 1200) then
         jumpToServer()
-    end
-    for i = 1,#alts do
-        if Players:FindFirstChild(alts[i]) and alts[i] ~= Players.LocalPlayer.Name then
-            jumpToServer()
-        end
-    end
-    for i = 1, PlayerInServer do
-        if getPlayers[i]:IsInGroup(5060810) or getPlayers[i]:IsInGroup(1200769) then
-            jumpToServer()
-        end
     end
 end)
