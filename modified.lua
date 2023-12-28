@@ -180,7 +180,7 @@ local function jumpToServer()
     local body = http:JSONDecode(req.Body) 
     local deep = math.random(1, 3)
     if deep > 1 then 
-        for i = 1, deep do 
+        for i = 1, deep, 1 do 
              req = request({ Url = string.format(sfUrl .. "&cursor=" .. body.nextPageCursor, 15502339080, "Desc", 100) }) 
              body = http:JSONDecode(req.Body) 
              task.wait(0.1)
