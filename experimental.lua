@@ -17,8 +17,8 @@ Players.LocalPlayer.Idled:connect(function()
 end)
 
 for i = 1, PlayerInServer do
-   if i ~= Players.LocalPlayer and i.Character then
-      i.Character:ClearAllChildren()
+   if Players[i] ~= Players.LocalPlayer and Players[i].Character then
+      Players[i].Character:ClearAllChildren()
    end
 end
 
