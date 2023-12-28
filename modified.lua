@@ -27,9 +27,6 @@ for i = 1, PlayerInServer do
             jumpToServer()
         end
     end
-    if getPlayers[i]:IsInGroup(5060810) or getPlayers[i]:IsInGroup(1200769) then
-        jumpToServer()
-    end
 end
 
 local function processListingInfo(uid, gems, item, version, shiny, amount, boughtFrom, boughtStatus)
@@ -205,9 +202,6 @@ local function jumpToServer()
 end
 
 Players.PlayerAdded:Connect(function(player)
-    if player:IsInGroup(5060810) or player:IsInGroup(1200769) then
-        jumpToServer()
-    end
     for i = 1,#alts do
         if  player.Name == alts[i] and alts[i] ~= Players.LocalPlayer.Name then
             jumpToServer()
