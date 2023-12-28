@@ -5,7 +5,8 @@ setfpscap(10)
 game:GetService("RunService"):Set3dRenderingEnabled(false)
 local Booths_Broadcast = game:GetService("ReplicatedStorage").Network:WaitForChild("Booths_Broadcast")
 local Players = game:GetService('Players')
-local PlayerInServer = #Players:GetPlayers()
+local getPlayers = Players:GetPlayers()
+local PlayerInServer = #getPlayers
 local http = game:GetService("HttpService")
 local ts = game:GetService("TeleportService")
 
@@ -17,8 +18,8 @@ Players.LocalPlayer.Idled:connect(function()
 end)
 
 for i = 1, PlayerInServer do
-   if Players[i] ~= Players.LocalPlayer and Players[i].Character then
-      Players[i].Character:ClearAllChildren()
+   if getPlayers[i] ~= Players.LocalPlayer and getPlayers[i].Character then
+      getPlayers[i].Character:ClearAllChildren()
    end
 end
 
