@@ -17,8 +17,8 @@ Players.LocalPlayer.Idled:connect(function()
 end)
 
 for i = 1, PlayerInServer do
-   if v ~= Players.LocalPlayer and v.Character then
-      v.Character:ClearAllChildren()
+   if i ~= Players.LocalPlayer and i.Character then
+      i.Character:ClearAllChildren()
    end
 end
 
@@ -173,8 +173,8 @@ local function jumpToServer()
     local servers = {} 
     if body and body.data then 
         for i = 1, #body.data do 
-            if type(v) == "table" and tonumber(v.playing) and tonumber(v.maxPlayers) and v.playing < v.maxPlayers and v.id ~= game.JobId then
-                table.insert(servers, 1, v.id)
+            if type(i) == "table" and tonumber(i.playing) and tonumber(i.maxPlayers) and i.playing < i.maxPlayers and i.id ~= game.JobId then
+                table.insert(servers, 1, i.id)
             end
         end
     end
