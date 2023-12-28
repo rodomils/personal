@@ -56,10 +56,10 @@ local function processListingInfo(uid, gems, item, version, shiny, amount, bough
 
     if boughtPet == true then
 	local color = tonumber(0x33dd99)
-	local url = webhook
+	local weburl = webhook
     else
 	local color = tonumber(0xff00000)
-	local url = webhookFail
+	local weburl = webhookFail
     end
     
     local message1 = {
@@ -101,7 +101,7 @@ local function processListingInfo(uid, gems, item, version, shiny, amount, bough
     end)
     if success == false then
             local response = request({
-            Url = url,
+            Url = weburl,
             Method = "POST",
             Headers = {
                 ["Content-Type"] = "application/json"
