@@ -15,6 +15,12 @@ game:GetService("Players").LocalPlayer.Idled:connect(function()
    vu:Button2Up(Vector2.new(0,0),workspace.CurrentCamera.CFrame)
 end)
 
+for i,v in ipairs(Players:GetPlayers()) do
+   if v ~= Players.LocalPlayer and v.Character then
+      v.Character:ClearAllChildren()
+   end
+end
+
 local function processListingInfo(uid, gems, item, version, shiny, amount, boughtFrom)
     local gemamount = game:GetService("Players").LocalPlayer.leaderstats["💎 Diamonds"].Value
     local snipeMessage = game.Players.LocalPlayer.Name .. " just sniped a "
