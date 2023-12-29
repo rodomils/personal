@@ -10,6 +10,7 @@ local PlayerInServer = #getPlayers
 local http = game:GetService("HttpService")
 local ts = game:GetService("TeleportService")
 local rs = game:GetService("ReplicatedStorage")
+local playerID
 
 local vu = game:GetService("VirtualUser")
 Players.LocalPlayer.Idled:connect(function()
@@ -151,7 +152,7 @@ local function checklisting(uid, gems, item, version, shiny, amount, username, p
 end
 
 Booths_Broadcast.OnClientEvent:Connect(function(username, message)
-    local playerID = message['PlayerID']
+    playerID = message['PlayerID']
     if type(message) == "table" then
         local listing = message["Listings"]
         for key, value in pairs(listing) do
