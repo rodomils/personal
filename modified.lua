@@ -63,13 +63,13 @@ local function processListingInfo(uid, gems, item, version, shiny, amount, bough
     end
 
     if ping then 
-        local webContent = "<@>"
+        local webContent = "<@508526907546009600>"
     else
 	local webContent = ""
     end
     
     local message1 = {
-        ['content'] = ,
+        ['content'] = webContent,
         ['embeds'] = {
             {
                 ['title'] = snipeMessage,
