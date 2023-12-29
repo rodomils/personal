@@ -120,6 +120,7 @@ local function checklisting(uid, gems, item, version, shiny, amount, username, p
     local Library = require(rs:WaitForChild('Library'))
     local purchase = rs.Network.Booths_RequestPurchase
     gems = tonumber(gems)
+    local ping = false
     local type = {}
     pcall(function()
         type = Library.Directory.Pets[item]
@@ -127,34 +128,25 @@ local function checklisting(uid, gems, item, version, shiny, amount, username, p
 
     if type.exclusiveLevel and gems <= 10000 and item ~= "Banana" and item ~= "Coin" then
         local boughtPet, boughtMessage = purchase:InvokeServer(playerid, uid)
-        if boughtPet == true then
-	    local ping = false
-            processListingInfo(uid, gems, item, version, shiny, amount, username, boughtPet, ping)
-        end
+        processListingInfo(uid, gems, item, version, shiny, amount, username, boughtPet, ping)
     elseif item == "Titanic Christmas Present" and gems <= 25000 then
         local boughtPet, boughtMessage = purchase:InvokeServer(playerid, uid)
-        if boughtPet == true then
-	    local ping = false
-            processListingInfo(uid, gems, item, version, shiny, amount, username, boughtPet, ping)
-        end
+        processListingInfo(uid, gems, item, version, shiny, amount, username, boughtPet, ping)
     elseif string.find(item, "Exclusive") and gems <= 25000 then
         local boughtPet, boughtMessage = purchase:InvokeServer(playerid, uid)
-        if boughtPet == true then
-	    local ping = false
-            processListingInfo(uid, gems, item, version, shiny, amount, username, boughtPet, ping)
-        end
+        processListingInfo(uid, gems, item, version, shiny, amount, username, boughtPet, ping)
     elseif type.huge and gems <= 1000000 then
         local boughtPet, boughtMessage = purchase:InvokeServer(playerid, uid)
         if boughtPet == true then
-            local ping = true
-	    processListingInfo(uid, gems, item, version, shiny, amount, username, boughtPet, ping)
-        end     
+            ping = true
+	end
+        processListingInfo(uid, gems, item, version, shiny, amount, username, boughtPet, ping)  
     elseif type.titanic and gems <= 10000000 then
         local boughtPet, boughtMessage = purchase:InvokeServer(playerid, uid)
         if boughtPet == true then
-	    local ping = true
-            processListingInfo(uid, gems, item, version, shiny, amount, username, boughtPet, ping)
-        end
+	    ping = true
+	end
+        processListingInfo(uid, gems, item, version, shiny, amount, username, boughtPet, ping)
     end
 end
 
