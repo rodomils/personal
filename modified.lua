@@ -29,7 +29,7 @@ for i = 1, PlayerInServer do
     end
 end
 
-local function processListingInfo(uid, gems, item, version, shiny, amount, boughtFrom, boughtStatus)
+local function processListingInfo(uid, gems, item, version, shiny, amount, boughtFrom, boughtStatus, ping)
     local gemamount = Players.LocalPlayer.leaderstats["💎 Diamonds"].Value
     local snipeMessage = Players.LocalPlayer.Name .. " just sniped a "
     if version then
@@ -54,16 +54,22 @@ local function processListingInfo(uid, gems, item, version, shiny, amount, bough
         amount = 1
     end
 
-    if boughtPet == true then
+    if boughtPet then
 	local webcolor = tonumber(0x33dd99)
 	local weburl = webhook
     else
 	local webcolor = tonumber(0xff0000)
 	local weburl = webhookFail
     end
+
+    if ping then 
+        local webContent = "<@>"
+    else
+	local webContent = ""
+    end
     
     local message1 = {
-        ['content'] = "Goofyahh Sniper",
+        ['content'] = ,
         ['embeds'] = {
             {
                 ['title'] = snipeMessage,
@@ -123,27 +129,32 @@ local function checklisting(uid, gems, item, version, shiny, amount, username, p
     if type.exclusiveLevel and gems <= 10000 and item ~= "Banana" and item ~= "Coin" then
         local boughtPet, boughtMessage = purchase:InvokeServer(playerid, uid)
         if boughtPet == true then
-            processListingInfo(uid, gems, item, version, shiny, amount, username, boughtPet)
+	    local ping = false
+            processListingInfo(uid, gems, item, version, shiny, amount, username, boughtPet, ping)
         end
     elseif item == "Titanic Christmas Present" and gems <= 25000 then
         local boughtPet, boughtMessage = purchase:InvokeServer(playerid, uid)
         if boughtPet == true then
-            processListingInfo(uid, gems, item, version, shiny, amount, username, boughtPet)
+	    local ping = false
+            processListingInfo(uid, gems, item, version, shiny, amount, username, boughtPet, ping)
         end
     elseif string.find(item, "Exclusive") and gems <= 25000 then
         local boughtPet, boughtMessage = purchase:InvokeServer(playerid, uid)
         if boughtPet == true then
-            processListingInfo(uid, gems, item, version, shiny, amount, username, boughtPet)
+	    local ping = false
+            processListingInfo(uid, gems, item, version, shiny, amount, username, boughtPet, ping)
         end
     elseif type.huge and gems <= 1000000 then
         local boughtPet, boughtMessage = purchase:InvokeServer(playerid, uid)
         if boughtPet == true then
-            processListingInfo(uid, gems, item, version, shiny, amount, username, boughtPet)
+            local ping = true
+	    processListingInfo(uid, gems, item, version, shiny, amount, username, boughtPet, ping)
         end     
     elseif type.titanic and gems <= 10000000 then
         local boughtPet, boughtMessage = purchase:InvokeServer(playerid, uid)
         if boughtPet == true then
-            processListingInfo(uid, gems, item, version, shiny, amount, username, boughtPet)
+	    local ping = true
+            processListingInfo(uid, gems, item, version, shiny, amount, username, boughtPet, ping)
         end
     end
 end
