@@ -12,10 +12,14 @@ local ts = game:GetService("TeleportService")
 local rs = game:GetService("ReplicatedStorage")
 local playerID
 
+local vu = game:GetService("VirtualUser")
+Players.LocalPlayer.Idled:connect(function()
+   vu:Button2Down(Vector2.new(0,0),workspace.CurrentCamera.CFrame)
+   task.wait(1)
+   vu:Button2Up(Vector2.new(0,0),workspace.CurrentCamera.CFrame)
+end)
+
 for i = 1, PlayerInServer do
-   if getPlayers[i] ~= Players.LocalPlayer and getPlayers[i].Character then
-      getPlayers[i].Character:ClearAllChildren()
-   end
    for ii = 1,#alts do
         if getPlayers[i].Name == alts[ii] and alts[ii] ~= Players.LocalPlayer.Name then
             jumpToServer()
