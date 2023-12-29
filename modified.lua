@@ -102,7 +102,7 @@ local function processListingInfo(uid, gems, item, version, shiny, amount, bough
     }
 
     local jsonMessage = http:JSONEncode(message1)
-    local success, response = pcall(function()
+    local success, errorMessage = pcall(function()
             http:PostAsync(getgenv().webhook, jsonMessage)
     end)
     if success == false then
@@ -152,7 +152,9 @@ local function checklisting(uid, gems, item, version, shiny, amount, username, p
 end
 
 Booths_Broadcast.OnClientEvent:Connect(function(username, message)
-    playerID = message['PlayerID']
+    pcall(function()
+	playerID = message['PlayerID']
+    end)
     if type(message) == "table" then
         local listing = message["Listings"]
         for key, value in pairs(listing) do
