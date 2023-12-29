@@ -31,9 +31,8 @@ for i = 1, PlayerInServer do
 end
 
 local function processListingInfo(uid, gems, item, version, shiny, amount, boughtFrom, boughtStatus, mention)
-    local gemamount = Players.LocalPlayer.leaderstats["💎 Diamonds"].Value
     local snipeMessage = Players.LocalPlayer.Name .. " just sniped a "
-    local weburl, webContent, webcolor
+    local gemamount, weburl, webContent, webcolor
     if version then
         if version == 2 then
             version = "Rainbow"
@@ -57,6 +56,7 @@ local function processListingInfo(uid, gems, item, version, shiny, amount, bough
     end
 
     if boughtStatus then
+	gemamount = Players.LocalPlayer.leaderstats["💎 Diamonds"].Value
 	webcolor = tonumber(0x33dd99)
 	weburl = webhook
 	if mention then 
