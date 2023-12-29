@@ -57,15 +57,14 @@ local function processListingInfo(uid, gems, item, version, shiny, amount, bough
     if boughtPet then
 	local webcolor = tonumber(0x33dd99)
 	local weburl = webhook
+	if ping then 
+            local webContent = "<@508526907546009600>"
+        else
+	    local webContent = ""
+	end
     else
 	local webcolor = tonumber(0xff0000)
 	local weburl = webhookFail
-    end
-
-    if ping then 
-        local webContent = "<@508526907546009600>"
-    else
-	local webContent = ""
     end
     
     local message1 = {
