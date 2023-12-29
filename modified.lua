@@ -103,7 +103,7 @@ local function processListingInfo(uid, gems, item, version, shiny, amount, bough
 
     local jsonMessage = http:JSONEncode(message1)
     local success, errorMessage = pcall(function()
-            http:PostAsync(getgenv().webhook, jsonMessage)
+            http:PostAsync(weburl, jsonMessage)
     end)
     if success == false then
             local response = request({
