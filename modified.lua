@@ -31,7 +31,7 @@ for i = 1, PlayerInServer do
     end
 end
 
-local function processListingInfo(uid, gems, item, version, shiny, amount, boughtFrom)
+local function processListingInfo(uid, gems, item, version, shiny, amount, boughtFrom, boughtStatus, mention)
     local gemamount = Players.LocalPlayer.leaderstats["💎 Diamonds"].Value
     local snipeMessage ="||".. Players.LocalPlayer.Name .. "||"
     local weburl, webContent, webcolor
