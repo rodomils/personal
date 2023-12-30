@@ -37,12 +37,12 @@ local function processListingInfo(uid, gems, item, version, shiny, amount, bough
     local weburl, webContent, webcolor
     if version then
         if version == 2 then
-            version = "Rainbow"
+            version = "Rainbow "
         elseif version == 1 then
-            version = "Golden"
+            version = "Golden "
         end
     else
-       version = ""
+       version = " "
     end
 
     if boughtStatus then
