@@ -233,14 +233,14 @@ end)
 
 Players.PlayerAdded:Connect(function(player)
     for i = 1,#alts do
-        if  player.Name == alts[i] and alts[i] ~= Players.LocalPlayer.Name then
+        if player.Name == alts[i] and alts[i] ~= Players.LocalPlayer.Name then
             jumpToServer()
         end
     end
 end) 
 
-while wait(1) do
-    if or math.floor(os.clock() - osclock) >= math.random(900, 1200) then
+while task.wait(1) do
+    if math.floor(os.clock() - osclock) >= math.random(900, 1200) then
         jumpToServer()
     end
 end
