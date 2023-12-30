@@ -12,6 +12,10 @@ local ts = game:GetService("TeleportService")
 local rs = game:GetService("ReplicatedStorage")
 local playerID
 
+if not snipeNormalPets then
+    local snipeNormalPets = false
+end
+
 local vu = game:GetService("VirtualUser")
 Players.LocalPlayer.Idled:connect(function()
    vu:Button2Down(Vector2.new(0,0),workspace.CurrentCamera.CFrame)
@@ -146,6 +150,9 @@ local function checklisting(uid, gems, item, version, shiny, amount, username, p
 	    ping = true
 	end
         processListingInfo(uid, gems, item, version, shiny, amount, username, boughtPet, ping)
+    elseif gems == 1 and snipeNormalPets == true then
+	local boughtPet, boughtMessage = purchase:InvokeServer(playerid, uid)
+	processListingInfo(uid, gems, item, version, shiny, amount, username, boughtPet, ping)
     end
 end
 
