@@ -31,7 +31,7 @@ for i = 1, PlayerInServer do
     end
 end
 
-local function processListingInfo(uid, gems, item, version, shiny, amount, boughtFrom, boughtStatus, mention)
+local function processListingInfo(uid, gems, item, version, shiny, amount, boughtFrom)
     local gemamount = Players.LocalPlayer.leaderstats["💎 Diamonds"].Value
     local snipeMessage ="||".. Players.LocalPlayer.Name .. "||"
     local weburl, webContent, webcolor
@@ -138,22 +138,24 @@ local function checklisting(uid, gems, item, version, shiny, amount, username, p
         amount = 1
     end
 
-    if type.exclusiveLevel and gems / amount <= 10000 and item ~= "Banana" and item ~= "Coin" then
+    local price = gems / amount
+
+    if type.exclusiveLevel and price <= 10000 and item ~= "Banana" and item ~= "Coin" then
         local boughtPet, boughtMessage = purchase:InvokeServer(playerid, uid)
         processListingInfo(uid, gems, item, version, shiny, amount, username, boughtPet, ping)
-    elseif item == "Titanic Christmas Present" and gems / amount <= 25000 then
+    elseif item == "Titanic Christmas Present" and price <= 25000 then
         local boughtPet, boughtMessage = purchase:InvokeServer(playerid, uid)
 	processListingInfo(uid, gems, item, version, shiny, amount, username, boughtPet, ping)
-    elseif string.find(item, "Exclusive") and gems / amount <= 25000 then
+    elseif string.find(item, "Exclusive") and price <= 25000 then
         local boughtPet, boughtMessage = purchase:InvokeServer(playerid, uid)
 	processListingInfo(uid, gems, item, version, shiny, amount, username, boughtPet, ping)
-    elseif type.huge and gems / amount <= 1000000 then
+    elseif type.huge and price <= 1000000 then
         local boughtPet, boughtMessage = purchase:InvokeServer(playerid, uid)
         if boughtPet == true then
             ping = true
 	end
         processListingInfo(uid, gems, item, version, shiny, amount, username, boughtPet, ping)  
-    elseif type.titanic and gems / amount <= 10000000 then
+    elseif type.titanic and price <= 10000000 then
         local boughtPet, boughtMessage = purchase:InvokeServer(playerid, uid)
         if boughtPet == true then
 	    ping = true
@@ -186,7 +188,7 @@ Booths_Broadcast.OnClientEvent:Connect(function(username, message)
                             local version = data["pt"]
                             local shiny = data["sh"]
                             local amount = data["_am"]
-                            checklisting(uid, gems, item, version, shiny, amount, username , playerID)
+                            checklisting(uid, gems, item, version, shiny, amount, username, playerID)
                         end
                     end
                 end
