@@ -81,7 +81,7 @@ local function processListingInfo(uid, gems, item, version, shiny, amount, bough
                 ['fields'] = {
                     {
                         ['name'] = "__Price:__",
-                        ['value'] = tostring(gems),
+                        ['value'] = tostring(gems) .. " 💎",
                     },
                     {
                         ['name'] = "__Bought from:__",
@@ -89,11 +89,11 @@ local function processListingInfo(uid, gems, item, version, shiny, amount, bough
                     },
                     {
                         ['name'] = "__Amount:__",
-                        ['value'] = tostring(amount),
+                        ['value'] = tostring(amount) .. "x",
                     },
                     {
                         ['name'] = "__Remaining gems:__",
-                        ['value'] = tostring(gemamount),
+                        ['value'] = tostring(gemamount) .. " 💎",
                     },      
                     {
                         ['name'] = "__PetID:__",
