@@ -232,9 +232,9 @@ Players.PlayerAdded:Connect(function(player)
     end
 end) 
 
-game:GetService("RunService").Heartbeat:Connect(function()
+while wait(1) do
     PlayerInServer = #getPlayers
     if PlayerInServer < 25 or math.floor(os.clock() - osclock) >= math.random(900, 1200) then
         jumpToServer()
     end
-end)
+end
