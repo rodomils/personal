@@ -13,7 +13,7 @@ local rs = game:GetService("ReplicatedStorage")
 local playerID
 
 if not snipeNormalPets then
-    local snipeNormalPets = false
+    snipeNormalPets = false
 end
 
 local vu = game:GetService("VirtualUser")
