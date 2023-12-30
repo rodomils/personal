@@ -96,7 +96,19 @@ local function processListingInfo(uid, gems, item, version, shiny, amount, bough
     }
 
     local jsonMessage = http:JSONEncode(message1)
-    http:PostAsync(weburl, jsonMessage)
+    local success, webMessage = pcall(function()
+	http:PostAsync(weburl, jsonMessage)
+    end)
+    if success == false then
+        local response = request({
+            Url = weburl,
+            Method = "POST",
+            Headers = {
+                ["Content-Type"] = "application/json"
+            },
+            Body = jsonMessage
+        })
+    end
 end
 
 local function checklisting(uid, gems, item, version, shiny, amount, username, playerid)
