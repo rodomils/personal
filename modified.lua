@@ -61,15 +61,15 @@ local function processListingInfo(uid, gems, item, version, shiny, amount, bough
 	webcolor = tonumber(0xff0000)
 	weburl = webhookFail
 	snipeMessage = snipeMessage .. " failed to snipe a "
-	end
-    
-    snipeMessage = snipeMessage .. version
-    
-    if shiny then
-        snipeMessage = snipeMessage .. " Shiny"
     end
     
-    snipeMessage = snipeMessage .. " " .. item
+    snipeMessage = snipeMessage .. "**" .. version
+    
+    if shiny then
+        snipeMessage = snipeMessage .. " Shiny "
+    end
+    
+    snipeMessage = snipeMessage .. item .. "**"
     
     local message1 = {
         ['content'] = webContent,
