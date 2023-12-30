@@ -224,6 +224,13 @@ local function jumpToServer()
     ts:TeleportToPlaceInstance(15502339080, servers[math.random(1, randomCount)], game:GetService("Players").LocalPlayer) 
 end
 
+Players.PlayerRemoving:Connect(function(player)
+    PlayerInServer = #getPlayers
+    if PlayerInServer < 25 then
+        jumpToServer()
+    end
+end) 
+
 Players.PlayerAdded:Connect(function(player)
     for i = 1,#alts do
         if  player.Name == alts[i] and alts[i] ~= Players.LocalPlayer.Name then
@@ -233,8 +240,7 @@ Players.PlayerAdded:Connect(function(player)
 end) 
 
 while wait(1) do
-    PlayerInServer = #getPlayers
-    if PlayerInServer < 25 or math.floor(os.clock() - osclock) >= math.random(900, 1200) then
+    if or math.floor(os.clock() - osclock) >= math.random(900, 1200) then
         jumpToServer()
     end
 end
