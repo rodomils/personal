@@ -1,7 +1,3 @@
--- I would appreciate if the credits doesn't get removed, ty!
--- Credits: "fissurectomy" in Discord without the quotes!
--- Modified by root (s.g.i)
-
 local vu = game:GetService("VirtualUser")
 game:GetService("Players").LocalPlayer.Idled:connect(function()
    vu:Button2Down(Vector2.new(0,0),workspace.CurrentCamera.CFrame)
@@ -64,6 +60,7 @@ local function updateYCoordinate()
     game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(currentPosition)
 end
 
+
 game:GetService("RunService").Heartbeat:Connect(function()
     if s == false then
     	updateYCoordinate()
@@ -78,7 +75,7 @@ while wait(1) do
 		Text = 'wtf how',
 		Duration = 10,
 	})
-	break
 	s = true
     end
+    break
 end
