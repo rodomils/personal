@@ -56,7 +56,7 @@ game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(630.6519
 
 task.wait(1)
 
-_G.s = false
+local s = false
 local function updateYCoordinate()
     local currentCFrame = game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame
     local currentPosition = currentCFrame.Position
@@ -65,7 +65,7 @@ local function updateYCoordinate()
 end
 
 game:GetService("RunService").Heartbeat:Connect(function()
-    if not _G.s then
+    if s == false then
     	updateYCoordinate()
     	wait(0.1)
     end
@@ -79,6 +79,6 @@ while wait(1) do
 		Duration = 10,
 	})
 	break
-	_G.s = true
+	s = true
     end
 end
