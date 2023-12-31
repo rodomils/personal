@@ -73,13 +73,11 @@ local connect = game:GetService("RunService").Heartbeat:Connect(function()
 		Duration = 10,
 	})
 	s = true
+	connect:Disconnect()
     end
-    connect:Disconnect()
 end)
 
-while wait(0.1) do
-    if s == false then
-    	updateYCoordinate()
-    end
-    break
+while s == false do
+    updateYCoordinate()
+    wait(0.1)
 end
