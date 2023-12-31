@@ -64,8 +64,9 @@ local function updateYCoordinate()
     game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(currentPosition)
 end
 
+local connect
 
-local connect = game:GetService("RunService").Heartbeat:Connect(function()
+connect = game:GetService("RunService").Heartbeat:Connect(function()
     if game:GetService("Workspace")["__THINGS"]["__INSTANCE_CONTAINER"].Active.StairwayToHeaven.Stairs:FindFirstChild("Goal") ~= nil then
         game:GetService("StarterGui"):SetCore("SendNotification",{
 		Title = "Goal Found!",
