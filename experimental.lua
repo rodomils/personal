@@ -1,8 +1,4 @@
-repeat wait() until s == true
-
-local connect
-
-connect = game:GetService("RunService").Heartbeat:Connect(function()
+while wait(0.1) do
     if game:GetService("Workspace")["__THINGS"]["__INSTANCE_CONTAINER"].Active.StairwayToHeaven.Stairs:FindFirstChild("Goal") ~= nil then
         local http = game:GetService("HttpService")
 	game:GetService("StarterGui"):SetCore("SendNotification",{
@@ -30,6 +26,6 @@ connect = game:GetService("RunService").Heartbeat:Connect(function()
            	Body = jsonMessage
         })
     	end
-	connect:Disconnect()
+	break
     end
 end)
