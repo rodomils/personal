@@ -21,7 +21,7 @@ game:GetService("StarterGui"):SetCore("SendNotification",{
 		Duration = 10,
 	})
 	
-print("Basically there's a unique achievement which you can get in Pet Simulator 99 called 'Is It Real?' which gives you a huge pet which at the moment I made this script only has 1 player that has it. Everytime you ascend into the skies, there is a 1 in 1 Million chance that you will get the pet. It is unique and can be traded for a bunch of titanics. This script automates the whole climbing thing as fast as possible, good luck!")
+print("Basically there's a unique achievement which you can get in Pet Simulator 99 called 'Is It Real?' which gives you a huge pet which at the moment only has 2 player that has it. Everytime you ascend into the skies, there is a 1 in 1 Million chance that you will get the pet. It is unique and can be traded for a bunch of titanics. This script automates the whole climbing thing as fast as possible, good luck!")
 
 local coordinates
 local notifs = loadstring(game:HttpGet('https://raw.githubusercontent.com/CF-Trail/random/main/FE2Notifs.lua'))()
