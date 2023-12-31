@@ -54,7 +54,7 @@ local function processListingInfo(uid, gems, item, version, shiny, amount, bough
         else
 	    webContent = ""
 	end
-	if normalwebhook then
+	if snipeNormalPets then
 	    weburl = normalwebhook
 	end
     else
