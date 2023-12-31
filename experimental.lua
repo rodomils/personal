@@ -67,7 +67,11 @@ while task.wait(0.1) do
     if not game:GetService("Workspace")["__THINGS"]["__INSTANCE_CONTAINER"].Active.StairwayToHeaven.Stairs:FindFirstChild("Goal") then
         updateYCoordinate()
     else
-        notifs.alert('Goal Found.', nil, 1000000, 'rainbow')
+        game:GetService("StarterGui"):SetCore("SendNotification",{
+		Title = "Goal Found!",
+		Text = 'wtf how',
+		Duration = 10,
+	})
         break
     end
 end
