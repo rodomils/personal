@@ -68,8 +68,8 @@ end
 game:GetService("RunService").Heartbeat:Connect(function()
     if s == false then
     	updateYCoordinate()
-    	wait(0.2)
     end
+    wait(0.1)
 end)
 
 while wait(1) do
