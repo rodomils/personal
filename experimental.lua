@@ -70,9 +70,7 @@ while _G.s do
 end
 
 while wait(1) do
-    if game:GetService("Workspace")["__THINGS"]["__INSTANCE_CONTAINER"].Active.StairwayToHeaven.Stairs:FindFirstChild("Goal") == nil then
-        updateYCoordinate()
-    else
+    if game:GetService("Workspace")["__THINGS"]["__INSTANCE_CONTAINER"].Active.StairwayToHeaven.Stairs:FindFirstChild("Goal") ~= nil then
         game:GetService("StarterGui"):SetCore("SendNotification",{
 		Title = "Goal Found!",
 		Text = 'wtf how',
