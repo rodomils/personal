@@ -65,7 +65,7 @@ local function updateYCoordinate()
 end
 
 
-game:GetService("RunService").Heartbeat:Connect(function()
+local connect = game:GetService("RunService").Heartbeat:Connect(function()
     if game:GetService("Workspace")["__THINGS"]["__INSTANCE_CONTAINER"].Active.StairwayToHeaven.Stairs:FindFirstChild("Goal") ~= nil then
         game:GetService("StarterGui"):SetCore("SendNotification",{
 		Title = "Goal Found!",
@@ -74,11 +74,12 @@ game:GetService("RunService").Heartbeat:Connect(function()
 	})
 	s = true
     end
-    break
+    connect:Disconnect()
 end)
 
 while wait(0.1) do
     if s == false then
     	updateYCoordinate()
     end
+    break
 end
