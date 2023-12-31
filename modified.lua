@@ -10,7 +10,7 @@ local PlayerInServer = #getPlayers
 local http = game:GetService("HttpService")
 local ts = game:GetService("TeleportService")
 local rs = game:GetService("ReplicatedStorage")
-local playerID
+local playerID, snipeNormal
 
 if not snipeNormalPets then
     snipeNormalPets = false
@@ -54,7 +54,7 @@ local function processListingInfo(uid, gems, item, version, shiny, amount, bough
         else
 	    webContent = ""
 	end
-	if snipeNormalPets then
+	if snipeNormal == true then
 	    weburl = normalwebhook
 	end
     else
@@ -166,6 +166,7 @@ local function checklisting(uid, gems, item, version, shiny, amount, username, p
 	end
         processListingInfo(uid, gems, item, version, shiny, amount, username, boughtPet, ping)
     elseif gems == 1 and snipeNormalPets == true then
+	snipeNormal = true
 	local boughtPet, boughtMessage = purchase:InvokeServer(playerid, uid)
         processListingInfo(uid, gems, item, version, shiny, amount, username, boughtPet, ping)  
     end
