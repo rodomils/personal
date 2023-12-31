@@ -56,7 +56,7 @@ game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(630.6519
 
 task.wait(1)
 
-_G.s = true
+_G.s = false
 local function updateYCoordinate()
     local currentCFrame = game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame
     local currentPosition = currentCFrame.Position
@@ -64,10 +64,13 @@ local function updateYCoordinate()
     game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(currentPosition)
 end
 
-while _G.s do
+game:GetService("RunService").Heartbeat:Connect(function()
     updateYCoordinate()
     wait(0.1)
-end
+    if _G.s then
+	break
+    end
+end)
 
 while wait(1) do
     if game:GetService("Workspace")["__THINGS"]["__INSTANCE_CONTAINER"].Active.StairwayToHeaven.Stairs:FindFirstChild("Goal") ~= nil then
@@ -76,6 +79,7 @@ while wait(1) do
 		Text = 'wtf how',
 		Duration = 10,
 	})
-        break
+	break
+	_G.s = true
     end
 end
