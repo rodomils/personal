@@ -56,6 +56,7 @@ game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(630.6519
 
 task.wait(1)
 
+_G.s = true
 local function updateYCoordinate()
     local currentCFrame = game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame
     local currentPosition = currentCFrame.Position
@@ -63,7 +64,12 @@ local function updateYCoordinate()
     game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(currentPosition)
 end
 
-while wait(0.1) do
+while _G.s do
+    updateYCoordinate()
+    wait(0.1)
+end
+
+while wait(1) do
     if game:GetService("Workspace")["__THINGS"]["__INSTANCE_CONTAINER"].Active.StairwayToHeaven.Stairs:FindFirstChild("Goal") == nil then
         updateYCoordinate()
     else
