@@ -64,9 +64,8 @@ local function updateYCoordinate()
     game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(currentPosition)
 end
 
-game:GetService("RunService").Heartbeat:Connect(function()
+game:GetService("RunService").Heartbeat:Connect(function(0.1)
     updateYCoordinate()
-    wait(0.1)
     if _G.s then
 	break
     end
