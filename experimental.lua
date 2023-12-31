@@ -66,13 +66,6 @@ end
 
 
 game:GetService("RunService").Heartbeat:Connect(function()
-    if s == false then
-    	updateYCoordinate()
-    end
-    wait(0.1)
-end)
-
-while wait(1) do
     if game:GetService("Workspace")["__THINGS"]["__INSTANCE_CONTAINER"].Active.StairwayToHeaven.Stairs:FindFirstChild("Goal") ~= nil then
         game:GetService("StarterGui"):SetCore("SendNotification",{
 		Title = "Goal Found!",
@@ -82,4 +75,10 @@ while wait(1) do
 	s = true
     end
     break
+end)
+
+while wait(0.1) do
+    if s == false then
+    	updateYCoordinate()
+    end
 end
