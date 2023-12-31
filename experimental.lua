@@ -100,5 +100,5 @@ end)
 
 while s == false do
     updateYCoordinate()
-    task.wait(0.04)
+    task.wait(0.1)
 end
