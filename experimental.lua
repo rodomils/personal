@@ -1,151 +1,73 @@
-wait(15) 
-getgenv().config = {
-        placeId = 8737899170,
-        eventName = "Gingerbread", -- prob to change it to Comet or Coin Jar
-        servers = {
-            count = 100, -- 10, 25, 50, 100
-            sort = "Desc", -- Desc, Asc
-            pageDeep = math.random(2, 6), -- selected players page
-        },
-        delays = {
-            beforeExecute = 0.3,
-            beforeBreak = 1.5,
-            afterBreak = 2.4,
-            hit = 0.03,
-            lootbag = 0.03,
-            beforeTp = 2,
-            whileError = 10,
-        },
-    }
+-- I would appreciate if the credits doesn't get removed, ty!
+-- Credits: "fissurectomy" in Discord without the quotes!
+-- Modified by root (s.g.i)
 
-if not getgenv().config then 
-    getgenv().config = { 
-        placeId = 8737899170, 
-        eventName = "Gingerbread",
-        count = 100, 
-        sort = "Asc", 
-        pageDeep = math.random(2, 10), 
-        delays = { beforeExecute = 0.3, beforeBreak = 1.5, afterBreak = 2.4, hit = 0.03, lootbag = 0.03, beforeTp = 2, whileError = 10, }, 
-    } 
-end 
-repeat wait() until game.PlaceId ~= nil 
-if not game:IsLoaded() then
-        game.Loaded:Wait() 
-end 
-local ReplicatedStorage = game:GetService("ReplicatedStorage") 
-local HttpService = game:GetService("HttpService") 
-local Players = game:GetService("Players") 
-local TeleportService = game:GetService("TeleportService") 
-wait(config.delays.beforeExecute) 
-if game.PlaceId ~= config.placeId then print("Gingerbread hunter unloaded, unknown place.")
-        return
-end 
-local Library = require(ReplicatedStorage:WaitForChild("Library", 2000)) 
-if not Library.Loaded then
-        repeat wait() until Library.Loaded ~= false
-end 
-local RandomEventCmds = Library.RandomEventCmds 
-local LocalPlayer = Players.LocalPlayer 
-local Character = LocalPlayer.Character 
-local Humanoid = Character:WaitForChild("Humanoid", 1000) 
-local HumanoidRootPart = Character:WaitForChild("HumanoidRootPart", 1000) 
-print(HttpService:JSONEncode(config)) 
-function tpToPos(cframe) 
-    HumanoidRootPart.CFrame = CFrame.new(cframe) 
-end 
-function jumpToServer() 
-    local sfUrl = "https://games.roblox.com/v1/games/%s/servers/Public?sortOrder=%s&limit=%s&excludeFullGames=true" 
-    local req = request({ Url = string.format(sfUrl, config.placeId, config.servers.sort, config.servers.count) }) 
-    local body = HttpService:JSONDecode(req.Body) 
-    if config.servers.pageDeep > 1 then 
-        for i = 1, config.servers.pageDeep, 1 do 
-            req = request({ Url = string.format( sfUrl .. "&cursor=" .. body.nextPageCursor, config.placeId, config.servers.sort, config.servers.count ), }) 
-            body = HttpService:JSONDecode(req.Body) 
-            wait(0.1) 
-        end 
-    end 
-    local servers = {} 
-    if body and body.data then 
-        for i, v in next, body.data do 
-            if type(v) == "table" and tonumber(v.playing) and tonumber(v.maxPlayers) and v.playing < v.maxPlayers and v.id ~= game.JobId then
-                table.insert(servers, 1, v.id) 
-            end 
-        end 
-    end 
-    local randomCount = #servers 
-    if not randomCount then
-       randomCount = 2
-    end 
-    TeleportService:TeleportToPlaceInstance(config.placeId, servers[math.random(1, randomCount)], Players.LocalPlayer) 
-end 
-Library.Alert.Message("Finding Gingerbread...") 
-local activeEvents = RandomEventCmds.GetActive() or RandomEventCmds.GetActive()
-local isGingerbreadExist = false
-wait(config.delays.beforeExecute)
-for eventId, event in activeEvents do
-        if event.name == config.eventName then
-                isGingerbreadExist = true
-                tpToPos(event.origin + Vector3.new(0, 18, 0))
-        end
-end 
-Library.Things:FindFirstChild("Lootbags").ChildAdded:Connect(function(lootbag)
-                wait()
-                if lootbag then
-                        game:GetService("ReplicatedStorage"):WaitForChild("Network"):WaitForChild("Lootbags_Claim"):FireServer(unpack({ [1] = { [1] = lootbag.Name, }, }))
-                end 
-end)  
-function CollectAllLootbags() pcall(function() 
-        for _, lootbag in pairs(Library.Things:FindFirstChild("Lootbags"):GetChildren()) do
-                if lootbag and not lootbag:GetAttribute("Collected") then
-                        game:GetService("ReplicatedStorage"):WaitForChild("Network"):WaitForChild("Lootbags_Claim"):FireServer(unpack({ [1] = { [1] = lootbag.Name, }, }))
-                                wait(config.delays.lootbag)
-                end
-        end
-end) 
-end 
-function findGingerbread() 
-        for index, breakable in Library.Things.Breakables:GetChildren() do
-                if breakable.ClassName == "Model" and breakable:GetAttribute("BreakableID") == config.eventName then
-                        return breakable
-                end
-        end
-end 
-if isGingerbreadExist then
-        Library.Alert.Message("Gingerbread exist!")
-        wait(config.delays.beforeBreak)
-        local findedGingerbread = nil
-        for i = 1, 5, 1 do
-                findedGingerbread = findGingerbread()
-                if findedGingerbread then
-                        tpToPos(findedGingerbread.PrimaryPart.Position + Vector3.new(0, 18, 0))
-                        break
-                else
-                        wait(0.5)
-                end
-        end
-        if findedGingerbread then
-                Library.Alert.Message("Start breaking!")
-                while Library.Things.Breakables:FindFirstChild(findedGingerbread.Name) do
-                        local args = { [1] = findedGingerbread.Name, } game:GetService("ReplicatedStorage"):WaitForChild("Network"):WaitForChild("Breakables_PlayerDealDamage"):FireServer(unpack(args))
-                        wait(config.delays.hit)
-                end
-                Library.Alert.Message("Broke!")
-                findedGingerbread = false
-        end
-        CollectAllLootbags()
-        wait(config.delays.afterBreak)
-        CollectAllLootbags()
-        wait(config.delays.afterBreak)
-else
-        Library.Alert.Message("Gingerbread not found :c")
+local vu = game:GetService("VirtualUser")
+Players.LocalPlayer.Idled:connect(function()
+   vu:Button2Down(Vector2.new(0,0),workspace.CurrentCamera.CFrame)
+   task.wait(1)
+   vu:Button2Up(Vector2.new(0,0),workspace.CurrentCamera.CFrame)
+end)
+
+if Stairway == true then
+	return
 end
-TeleportService.TeleportInitFailed:Connect(function(player, resultEnum, msg)
-                print(string.format("server: teleport %s failed, resultEnum:%s, msg:%s", player.Name, tostring(resultEnum), msg))
-                config.servers.pageDeep = config.servers.pageDeep + 1
-                Library.Alert.Message("Tp Retry... :" .. msg)
-                wait(config.delays.whileError)
-                jumpToServer()
-        end) 
-wait(config.delays.beforeTp)
-Library.Alert.Message("Tp to another server...")
-jumpToServer()
+
+pcall(function() getgenv().Stairway = true end)
+
+game:GetService("StarterGui"):SetCore("SendNotification",{
+		Title = "More Info",
+		Text = 'Type "/console" in chat to know what this is for',
+		Duration = 10,
+	})
+	
+print("Basically there's a unique achievement which you can get in Pet Simulator 99 called 'Is It Real?' which gives you a huge pet which at the moment I made this script only has 1 player that has it. Everytime you ascend into the skies, there is a 1 in 1 Million chance that you will get the pet. It is unique and can be traded for a bunch of titanics. This script automates the whole climbing thing as fast as possible, good luck!")
+
+local coordinates
+local notifs = loadstring(game:HttpGet('https://raw.githubusercontent.com/CF-Trail/random/main/FE2Notifs.lua'))()
+
+notifs.alert('Execute "_G.s = false" to stop!\nThis is the fastest it can go due to stairs being generated.', nil, 1000000, 'rainbow')
+task.wait(0.01)
+
+local lastNotificationTime = 0
+local notificationDelay = 0.5
+
+local function updateCoordinates()
+    local player = game.Players.LocalPlayer
+    local character = player.Character or player.CharacterAdded:Wait()
+    local humanoidRootPart = character:WaitForChild("HumanoidRootPart")
+
+    coordinates = humanoidRootPart.Position.Y -- Only the Y axis
+
+    local currentTime = tick()
+    if currentTime - lastNotificationTime >= notificationDelay then
+        notifs.alert('Studs above the sky: ' .. tostring(math.floor(coordinates)) .. '', nil, 0.5) -- Display Y axis without decimals
+        lastNotificationTime = currentTime
+    end
+end
+
+game:GetService("RunService").Heartbeat:Connect(updateCoordinates)
+
+game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(120.79306030273438, -126.99183654785156, -213.44664001464844)
+
+task.wait(5)
+
+game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(630.6519165039062, 143.7024383544922, -1891.4598388671875)
+
+task.wait(1)
+
+local function updateYCoordinate()
+    local currentCFrame = game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame
+    local currentPosition = currentCFrame.Position
+    currentPosition = Vector3.new(currentPosition.X, currentPosition.Y + 36, currentPosition.Z)
+    game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(currentPosition)
+end
+
+while task.wait(0.1) do
+    if not game:GetService("Workspace")["__THINGS"]["__INSTANCE_CONTAINER"].Active.StairwayToHeaven.Stairs:FindFirstChild("Goal") then
+        updateYCoordinate()
+    else
+        notifs.alert('Goal Found.', nil, 1000000, 'rainbow')
+        break
+    end
+end
