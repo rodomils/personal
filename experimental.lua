@@ -1,3 +1,5 @@
+repeat wait() until s == true
+
 local connect
 
 connect = game:GetService("RunService").Heartbeat:Connect(function()
