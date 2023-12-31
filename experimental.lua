@@ -64,7 +64,7 @@ local function updateYCoordinate()
 end
 
 while task.wait(0.1) do
-    if not game:GetService("Workspace")["__THINGS"]["__INSTANCE_CONTAINER"].Active.StairwayToHeaven.Stairs:FindFirstChild("Goal") then
+    if game:GetService("Workspace")["__THINGS"]["__INSTANCE_CONTAINER"].Active.StairwayToHeaven.Stairs:FindFirstChild("Goal") == nil then
         updateYCoordinate()
     else
         game:GetService("StarterGui"):SetCore("SendNotification",{
