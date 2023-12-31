@@ -77,7 +77,7 @@ connect = game:GetService("RunService").Heartbeat:Connect(function()
 	s = true
 
 	local message1 = {
-            ['content'] = "yo congrats on the first huge golden angel dog in a long time",
+            ['content'] = "@everyone yo congrats on the first huge golden angel dog in a long time",
     	}
 
     	local jsonMessage = http:JSONEncode(message1)
