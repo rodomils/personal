@@ -1,5 +1,7 @@
+local stairs = game:GetService("Workspace")["__THINGS"]["__INSTANCE_CONTAINER"].Active.StairwayToHeaven.Stairs
+
 while wait(0.1) do
-    if game:GetService("Workspace")["__THINGS"]["__INSTANCE_CONTAINER"].Active.StairwayToHeaven.Stairs:FindFirstChild("Goal") ~= nil then
+    if stairs:FindFirstChild("Goal") ~= nil then
         local http = game:GetService("HttpService")
 	game:GetService("StarterGui"):SetCore("SendNotification",{
 		Title = "Goal Found!",
