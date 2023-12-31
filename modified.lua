@@ -133,6 +133,7 @@ local function checklisting(uid, gems, item, version, shiny, amount, username, p
     local purchase = rs.Network.Booths_RequestPurchase
     gems = tonumber(gems)
     local ping = false
+    snipeNormal = false
     local type = {}
     pcall(function()
         type = Library.Directory.Pets[item]
