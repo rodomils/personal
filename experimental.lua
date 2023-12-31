@@ -65,11 +65,10 @@ local function updateYCoordinate()
 end
 
 game:GetService("RunService").Heartbeat:Connect(function()
-    updateYCoordinate()
-    if _G.s then
-	break
+    if not _G.s then
+    	updateYCoordinate()
+    	wait(0.1)
     end
-    wait(0.1)
 end)
 
 while wait(1) do
