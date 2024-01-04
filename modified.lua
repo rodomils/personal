@@ -35,7 +35,7 @@ local function processListingInfo(uid, gems, item, version, shiny, amount, bough
     local gemamount = Players.LocalPlayer.leaderstats["💎 Diamonds"].Value
     local snipeMessage ="||".. Players.LocalPlayer.Name .. "||"
     local weburl, webContent, webcolor
-    local versionVal = { [1] = "Golden", [2] = "Rainbow" }
+    local versionVal = { [1] = "Golden ", [2] = "Rainbow " }
     local versionStr = versionVal[version] or (version == nil and "")
     local mention = (string.find(item, "Huge") or string.find(item, "Titanic")) and "<@" .. userid .. ">" or ""
 	
