@@ -31,7 +31,7 @@ for i = 1, PlayerInServer do
     end
 end
 
-local function processListingInfo(uid, gems, item, version, shiny, amount, boughtFrom, boughtStatus, mention)
+local function processListingInfo(uid, gems, item, version, shiny, amount, boughtFrom, boughtStatus, mention, failMessage)
     local gemamount = Players.LocalPlayer.leaderstats["💎 Diamonds"].Value
     local snipeMessage ="||".. Players.LocalPlayer.Name .. "||"
     local weburl, webContent, webcolor
@@ -59,6 +59,7 @@ local function processListingInfo(uid, gems, item, version, shiny, amount, bough
 	    snipeNormal = false
 	end
     else
+	webContent = failMessage
 	webcolor = tonumber(0xff0000)
 	weburl = webhookFail
 	snipeMessage = snipeMessage .. " failed to snipe a "
@@ -152,34 +153,34 @@ local function checklisting(uid, gems, item, version, shiny, amount, username, p
     if type.exclusiveLevel and price <= 10000 and item ~= "Banana" and item ~= "Coin" then
         task.wait(3)
 	local boughtPet, boughtMessage = purchase:InvokeServer(playerid, uid)
-        processListingInfo(uid, gems, item, version, shiny, amount, username, boughtPet, ping)
+        processListingInfo(uid, gems, item, version, shiny, amount, username, boughtPet, ping, boughtMessage)
     elseif item == "Titanic Christmas Present" and price <= 25000 then
         task.wait(3.05)
 	local boughtPet, boughtMessage = purchase:InvokeServer(playerid, uid)
-	processListingInfo(uid, gems, item, version, shiny, amount, username, boughtPet, ping)
+	processListingInfo(uid, gems, item, version, shiny, amount, username, boughtPet, ping, boughtMessage)
     elseif string.find(item, "Exclusive") and price <= 25000 then
         task.wait(3.05)
 	local boughtPet, boughtMessage = purchase:InvokeServer(playerid, uid)
-	processListingInfo(uid, gems, item, version, shiny, amount, username, boughtPet, ping)
+	processListingInfo(uid, gems, item, version, shiny, amount, username, boughtPet, ping, boughtMessage)
     elseif type.huge and price <= 1000000 then
         task.wait(3.05)
 	local boughtPet, boughtMessage = purchase:InvokeServer(playerid, uid)
         if boughtPet == true then
             ping = true
 	end
-        processListingInfo(uid, gems, item, version, shiny, amount, username, boughtPet, ping)  
+        processListingInfo(uid, gems, item, version, shiny, amount, username, boughtPet, ping, boughtMessage)  
     elseif type.titanic and price <= 10000000 then
         task.wait(3.05)
 	local boughtPet, boughtMessage = purchase:InvokeServer(playerid, uid)
         if boughtPet == true then
 	    ping = true
 	end
-        processListingInfo(uid, gems, item, version, shiny, amount, username, boughtPet, ping)
+        processListingInfo(uid, gems, item, version, shiny, amount, username, boughtPet, ping, boughtMessage)
     elseif gems == 1 and snipeNormalPets == true then
 	task.wait(3.05)
 	snipeNormal = true
 	local boughtPet, boughtMessage = purchase:InvokeServer(playerid, uid)
-        processListingInfo(uid, gems, item, version, shiny, amount, username, boughtPet, ping)  
+        processListingInfo(uid, gems, item, version, shiny, amount, username, boughtPet, ping, boughtMessage)  
     end
 end
 
