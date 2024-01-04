@@ -31,6 +31,12 @@ Players.LocalPlayer.Idled:connect(function()
    vu:Button2Up(Vector2.new(0,0),workspace.CurrentCamera.CFrame)
 end)
 
+if PlayerInServer < 25 then
+    while task.wait(1) do
+	jumpToServer()
+    end
+end
+
 for i = 1, PlayerInServer do
    for ii = 1,#alts do
         if getPlayers[i].Name == alts[ii] and alts[ii] ~= Players.LocalPlayer.Name then
