@@ -143,7 +143,7 @@ local function tryPurchase(uid, gems, item, version, shiny, amount, username, cl
     print("PURCHASING ATTEMPT START") --for testings
     --while (buytimestamp - os.time()) > 1 then
     if buytimestamp > listTimestamp then
-      task.wait(3.05) --could try deductiong the ping ? : game.Players.LocalPlayer:GetNetworkPing()
+      task.wait(math.pi) --could try deductiong the ping ? : game.Players.LocalPlayer:GetNetworkPing()
     end
     print("PURCHASING ATTEMPT END - os " .. os.time() .. " - buy " .. buytimestamp .. " - offset " .. listTimestamp) --for testings
     local boughtPet, boughtMessage = game:GetService("ReplicatedStorage").Network.Booths_RequestPurchase:InvokeServer(playerid, uid)
