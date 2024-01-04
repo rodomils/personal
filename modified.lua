@@ -73,7 +73,7 @@ local function processListingInfo(uid, gems, item, version, shiny, amount, bough
 	end
     end
     
-    snipeMessage = snipeMessage .. "**" .. version
+    snipeMessage = snipeMessage .. "**" .. versionStr
     
     if shiny then
         snipeMessage = snipeMessage .. " Shiny "
