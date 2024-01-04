@@ -31,22 +31,6 @@ Players.LocalPlayer.Idled:connect(function()
    vu:Button2Up(Vector2.new(0,0),workspace.CurrentCamera.CFrame)
 end)
 
-if PlayerInServer < 25 then
-    while task.wait(1) do
-	jumpToServer()
-    end
-end
-
-for i = 1, PlayerInServer do
-   for ii = 1,#alts do
-        if getPlayers[i].Name == alts[ii] and alts[ii] ~= Players.LocalPlayer.Name then
-            while task.wait(1) do
-		jumpToServer()
-	    end
-        end
-    end
-end
-
 local function processListingInfo(uid, gems, item, version, shiny, amount, boughtFrom, boughtStatus, class, mention, failMessage, snipeNormal)
     local gemamount = Players.LocalPlayer.leaderstats["💎 Diamonds"].Value
     local snipeMessage ="||".. Players.LocalPlayer.Name .. "||"
@@ -257,6 +241,22 @@ local function jumpToServer()
        randomCount = 2
     end
     ts:TeleportToPlaceInstance(15502339080, servers[math.random(1, randomCount)], game:GetService("Players").LocalPlayer) 
+end
+
+if PlayerInServer < 25 then
+    while task.wait(1) do
+	jumpToServer()
+    end
+end
+
+for i = 1, PlayerInServer do
+   for ii = 1,#alts do
+        if getPlayers[i].Name == alts[ii] and alts[ii] ~= Players.LocalPlayer.Name then
+            while task.wait(1) do
+		jumpToServer()
+	    end
+        end
+    end
 end
 
 Players.PlayerRemoving:Connect(function(player)
