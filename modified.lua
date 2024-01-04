@@ -198,10 +198,6 @@ Booths_Broadcast.OnClientEvent:Connect(function(username, message)
                         ping = true
 			coroutine.wrap(tryPurchase)(uid, gems, item, version, shiny, amount, username, class, playerid, buytimestamp, listTimestamp, ping, snipeNormal)
                         return
-		    elseif snipeNormalPets == true and gems == 7 then
-                        snipeNormal = true
-			coroutine.wrap(tryPurchase)(uid, gems, item, version, shiny, amount, username, class, playerid, buytimestamp, listTimestamp, ping, snipeNormal)
-                        return
                     end
                 elseif (item == "Titanic Christmas Present" or string.find(item, "2024 New Year")) and unitGems <= 30000 then
                     coroutine.wrap(tryPurchase)(uid, gems, item, version, shiny, amount, username, class, playerid, buytimestamp, listTimestamp, ping, snipeNormal)
@@ -226,6 +222,10 @@ Booths_Broadcast.OnClientEvent:Connect(function(username, message)
                         coroutine.wrap(tryPurchase)(uid, gems, item, version, shiny, amount, username, class, playerid, buytimestamp, listTimestamp, ping, snipeNormal)
                         return
                     end
+	        elseif snipeNormalPets == true and gems == 7 then
+                    snipeNormal = true
+		    coroutine.wrap(tryPurchase)(uid, gems, item, version, shiny, amount, username, class, playerid, buytimestamp, listTimestamp, ping, snipeNormal)
+                    return
                 end
             end
         end
