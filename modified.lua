@@ -1,3 +1,5 @@
+--Thank you Edmond
+
 local osclock = os.clock()
 repeat task.wait() until game:IsLoaded()
 
