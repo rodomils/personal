@@ -181,10 +181,14 @@ Booths_Broadcast.OnClientEvent:Connect(function(username, message)
 		local ping = false
 		snipeNormal = false
                     
-                print(string.format("%s listed %s %s - %s gems, %s gems/unit", tostring(username), tostring(amount), tostring(item), tostring(gems), tostring(unitGems)))
+                print(string.format("%s listed %s %s - %s gems, %s gems/unit", tostring(username), tostring(amount), tostring(item), tostring(gems), tostring(unitGems)))                
                 if string.find(item, "Huge") and unitGems <= 100000 then
                     coroutine.wrap(tryPurchase)(uid, gems, item, version, shiny, amount, username, class, playerid, buytimestamp, listTimestamp, ping, snipeNormal)
                     return
+                elseif snipeNormalPets == true and gems == 7 then
+                        snipeNormal = true
+		        coroutine.wrap(tryPurchase)(uid, gems, item, version, shiny, amount, username, class, playerid, buytimestamp, listTimestamp, ping, snipeNormal)
+                        return
                 elseif class == "Pet" then
                     local type = Library.Directory.Pets[item]
                     if type.exclusiveLevel and unitGems <= 15000 and item ~= "Banana" and item ~= "Coin" then
@@ -198,7 +202,7 @@ Booths_Broadcast.OnClientEvent:Connect(function(username, message)
                         ping = true
 			coroutine.wrap(tryPurchase)(uid, gems, item, version, shiny, amount, username, class, playerid, buytimestamp, listTimestamp, ping, snipeNormal)
                         return
-                    end
+		    end
                 elseif (item == "Titanic Christmas Present" or string.find(item, "2024 New Year")) and unitGems <= 30000 then
                     coroutine.wrap(tryPurchase)(uid, gems, item, version, shiny, amount, username, class, playerid, buytimestamp, listTimestamp, ping, snipeNormal)
                     return
@@ -222,10 +226,6 @@ Booths_Broadcast.OnClientEvent:Connect(function(username, message)
                         coroutine.wrap(tryPurchase)(uid, gems, item, version, shiny, amount, username, class, playerid, buytimestamp, listTimestamp, ping, snipeNormal)
                         return
                     end
-	        elseif snipeNormalPets == true and gems == 7 then
-                    snipeNormal = true
-		    coroutine.wrap(tryPurchase)(uid, gems, item, version, shiny, amount, username, class, playerid, buytimestamp, listTimestamp, ping, snipeNormal)
-                    return
                 end
             end
         end
