@@ -258,6 +258,7 @@ local function jumpToServer()
 end
 
 Players.PlayerRemoving:Connect(function(player)
+    getPlayers = Players:GetPlayers()
     PlayerInServer = #getPlayers
     if PlayerInServer < 25 then
         while task.wait(1) do
