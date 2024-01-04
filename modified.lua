@@ -198,7 +198,7 @@ Booths_Broadcast.OnClientEvent:Connect(function(username, message)
                         ping = true
 			coroutine.wrap(tryPurchase)(uid, gems, item, version, shiny, amount, username, class, playerid, buytimestamp, listTimestamp, ping, snipeNormal)
                         return
-		    elseif snipeNormalPets = true and gems == 7 then
+		    elseif snipeNormalPets == true and gems == 7 then
                         snipeNormal = true
 			coroutine.wrap(tryPurchase)(uid, gems, item, version, shiny, amount, username, class, playerid, buytimestamp, listTimestamp, ping, snipeNormal)
                         return
