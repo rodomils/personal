@@ -45,16 +45,10 @@ local function processListingInfo(uid, gems, item, version, shiny, amount, bough
     local gemamount = Players.LocalPlayer.leaderstats["💎 Diamonds"].Value
     local snipeMessage ="||".. Players.LocalPlayer.Name .. "||"
     local weburl, webContent, webcolor
-    if version then
-        if version == 2 then
-            version = "Rainbow "
-        elseif version == 1 then
-            version = "Golden "
-        end
-    else
-       version = ""
-    end
 
+    local versionVal = { [1] = "Golden", [2] = "Rainbow" }
+    local versionStr = versionVal[version] or (version == nil and "Normal" or "")
+	
     if boughtStatus then
 	webcolor = tonumber(0x00ff00)
 	weburl = webhook
