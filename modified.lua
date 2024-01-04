@@ -190,6 +190,8 @@ local function checklisting(uid, gems, item, version, shiny, amount, username, p
     end
 end
 
+local f = coroutine.wrap(checklisting)
+
 Booths_Broadcast.OnClientEvent:Connect(function(username, message)
     local playerIDSuccess, playerError = pcall(function()
 	playerID = message['PlayerID']
@@ -211,7 +213,7 @@ Booths_Broadcast.OnClientEvent:Connect(function(username, message)
                             local version = data["pt"]
                             local shiny = data["sh"]
                             local amount = data["_am"]
-                            checklisting(uid, gems, item, version, shiny, amount, username, playerID)
+                            f(uid, gems, item, version, shiny, amount, username, playerID)
                         end
                     end
                 end
