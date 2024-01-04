@@ -252,20 +252,26 @@ end
 Players.PlayerRemoving:Connect(function(player)
     PlayerInServer = #getPlayers
     if PlayerInServer < 25 then
-        jumpToServer()
+        while task.wait(1) do
+	    jumpToServer()
+	end
     end
 end) 
 
 Players.PlayerAdded:Connect(function(player)
     for i = 1,#alts do
         if player.Name == alts[i] and alts[i] ~= Players.LocalPlayer.Name then
-            jumpToServer()
+            while task.wait(1) do
+	        jumpToServer()
+	    end
         end
     end
 end) 
 
 while task.wait(1) do
     if math.floor(os.clock() - osclock) >= math.random(900, 1200) then
-        jumpToServer()
+        while task.wait(1) do
+	    jumpToServer()		
+	end	
     end
 end
