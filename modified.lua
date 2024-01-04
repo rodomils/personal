@@ -1,4 +1,9 @@
---Thank you Edmond
+--[[
+Credits List
+ethereum: creating the base sniper
+chocolog: providing type.huge
+Edmond: offered tips for optimization
+]]--
 
 local osclock = os.clock()
 repeat task.wait() until game:IsLoaded()
