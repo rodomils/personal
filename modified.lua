@@ -138,6 +138,17 @@ local function processListingInfo(uid, gems, item, version, shiny, amount, bough
     end
 end
 
+local function tryPurchase(uid, gems, item, version, shiny, amount, username, class, playerid, buytimestamp, listTimestamp, ping)
+    print("PURCHASING ATTEMPT START") --for testings
+    --while (buytimestamp - os.time()) > 1 then
+    if buytimestamp > listTimestamp then
+      task.wait(3.05) --could try deductiong the ping ? : game.Players.LocalPlayer:GetNetworkPing()
+    end
+    print("PURCHASING ATTEMPT END - os " .. os.time() .. " - buy " .. buytimestamp .. " - offset " .. listTimestamp) --for testings
+    local boughtPet, boughtMessage = game:GetService("ReplicatedStorage").Network.Booths_RequestPurchase:InvokeServer(playerid, uid)
+    processListingInfo(uid, gems, item, version, shiny, amount, username, boughtPet, class, ping, boughtMessage)
+end
+
 Booths_Broadcast.OnClientEvent:Connect(function(username, message)
         if type(message) == "table" then
             local highestTimestamp = -math.huge -- Initialize with the smallest possible number
@@ -213,17 +224,6 @@ Booths_Broadcast.OnClientEvent:Connect(function(username, message)
             end
         end
     end)
-
-  local function tryPurchase(uid, gems, item, version, shiny, amount, username, class, playerid, buytimestamp, listTimestamp, ping)
-    print("PURCHASING ATTEMPT START") --for testings
-    --while (buytimestamp - os.time()) > 1 then
-    if buytimestamp > listTimestamp then
-      task.wait(3.05) --could try deductiong the ping ? : game.Players.LocalPlayer:GetNetworkPing()
-    end
-    print("PURCHASING ATTEMPT END - os " .. os.time() .. " - buy " .. buytimestamp .. " - offset " .. listTimestamp) --for testings
-    local boughtPet, boughtMessage = game:GetService("ReplicatedStorage").Network.Booths_RequestPurchase:InvokeServer(playerid, uid)
-    processListingInfo(uid, gems, item, version, shiny, amount, username, boughtPet, class, ping, boughtMessage)
-  end
 
 local function jumpToServer() 
     local sfUrl = "https://games.roblox.com/v1/games/%s/servers/Public?sortOrder=%s&limit=%s&excludeFullGames=true" 
