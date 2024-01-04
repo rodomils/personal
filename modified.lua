@@ -12,7 +12,8 @@ local PlayerInServer = #getPlayers
 local http = game:GetService("HttpService")
 local ts = game:GetService("TeleportService")
 local rs = game:GetService("ReplicatedStorage")
-local playerID, snipeNormal
+local Library = require(rs:WaitForChild('Library'))
+local snipeNormal
 
 if not snipeNormalPets then
     snipeNormalPets = false
@@ -178,6 +179,7 @@ Booths_Broadcast.OnClientEvent:Connect(function(username, message)
                 local class = tostring(listing["ItemData"]["class"])
                 local unitGems = gems/amount
 		local ping = false
+		snipeNormal = false
                     
                 print(string.format("%s listed %s %s - %s gems, %s gems/unit", tostring(username), tostring(amount), tostring(item), tostring(gems), tostring(unitGems)))
                 if string.find(item, "Huge") and unitGems <= 100000 then
