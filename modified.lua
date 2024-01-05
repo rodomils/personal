@@ -25,7 +25,7 @@ local rs = game:GetService("ReplicatedStorage")
 local snipeNormal
 local Library = require(rs:WaitForChild("Library"))
 
-if not snipeNormalPets then
+if snipeNormalPets == nil then
     snipeNormalPets = false
 end
 
