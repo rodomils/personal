@@ -6,8 +6,9 @@ Edmond: offered tips for optimization
 ]]--
 
 local osclock = os.clock()
-repeat wait() until game:IsLoaded()
-
+if not game:IsLoaded() then
+    game.Loaded:Wait()
+end
 
 setfpscap(10)
 game.Players.LocalPlayer.PlayerScripts.Scripts.Core["Idle Tracking"].Enabled = false
@@ -20,6 +21,7 @@ local http = game:GetService("HttpService")
 local ts = game:GetService("TeleportService")
 local rs = game:GetService("ReplicatedStorage")
 local snipeNormal
+local Library = require(rs:WaitForChild("Library"))
 
 if not snipeNormalPets then
     snipeNormalPets = false
