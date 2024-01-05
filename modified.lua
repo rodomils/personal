@@ -10,6 +10,8 @@ if not game:IsLoaded() then
     game.Loaded:Wait()
 end
 
+repeat task.wait() until rs:FindFirstChild('Library') -- i hate library loading
+
 setfpscap(10)
 game.Players.LocalPlayer.PlayerScripts.Scripts.Core["Idle Tracking"].Enabled = false
 game:GetService("RunService"):Set3dRenderingEnabled(false)
@@ -163,7 +165,6 @@ Booths_Broadcast.OnClientEvent:Connect(function(username, message)
                 local playerid = message['PlayerID']
                 local class = tostring(listing["ItemData"]["class"])
                 local unitGems = gems/amount
-		local Library = require(rs:WaitForChild('Library'))
 		snipeNormal = false
                                  
                 if string.find(item, "Huge") and unitGems <= 100000 then
