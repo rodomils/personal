@@ -8,6 +8,7 @@ Edmond: offered tips for optimization
 local osclock = os.clock()
 repeat wait() until game:IsLoaded()
 
+
 setfpscap(10)
 game.Players.LocalPlayer.PlayerScripts.Scripts.Core["Idle Tracking"].Enabled = false
 game:GetService("RunService"):Set3dRenderingEnabled(false)
@@ -18,7 +19,6 @@ local PlayerInServer = #getPlayers
 local http = game:GetService("HttpService")
 local ts = game:GetService("TeleportService")
 local rs = game:GetService("ReplicatedStorage")
-local Library = require(rs:WaitForChild('Library'))
 local snipeNormal
 
 if not snipeNormalPets then
@@ -161,6 +161,7 @@ Booths_Broadcast.OnClientEvent:Connect(function(username, message)
                 local playerid = message['PlayerID']
                 local class = tostring(listing["ItemData"]["class"])
                 local unitGems = gems/amount
+		local Library = require(rs:WaitForChild('Library'))
 		snipeNormal = false
                                  
                 if string.find(item, "Huge") and unitGems <= 100000 then
