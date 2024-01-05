@@ -42,7 +42,7 @@ local function processListingInfo(uid, gems, item, version, shiny, amount, bough
     if boughtStatus then
 	webcolor = tonumber(0x00ff00)
 	weburl = webhook
-        snipeMessage = snipeMessage .. " just sniped a "
+        snipeMessage = snipeMessage .. " just sniped ".. Library.Functions.Commas(amount) .."x "
         webContent = mention
 	if snipeNormal == true then
 	    weburl = normalwebhook
@@ -52,7 +52,7 @@ local function processListingInfo(uid, gems, item, version, shiny, amount, bough
 	webContent = failMessage
 	webcolor = tonumber(0xff0000)
 	weburl = webhookFail
-	snipeMessage = snipeMessage .. " failed to snipe a "
+	snipeMessage = snipeMessage .. " failed to snipe ".. Library.Functions.Commas(amount) .."x "
 	if snipeNormal == true then
 	    weburl = normalwebhook
 	    snipeNormal = false
@@ -81,7 +81,7 @@ local function processListingInfo(uid, gems, item, version, shiny, amount, bough
                 ['fields'] = {
                     {
                         ['name'] = "__Price:__",
-                        ['value'] = tostring(gems) .. " 💎",
+                        ['value'] = Library.Functions.ParseNumberSmart(gems) .. " 💎",
                     },
                     {
                         ['name'] = "__Bought from:__",
@@ -89,11 +89,11 @@ local function processListingInfo(uid, gems, item, version, shiny, amount, bough
                     },
                     {
                         ['name'] = "__Amount:__",
-                        ['value'] = tostring(amount) .. "x",
+                        ['value'] = Library.Functions.Commas(amount) .. "x",
                     },
                     {
                         ['name'] = "__Remaining gems:__",
-                        ['value'] = tostring(gemamount) .. " 💎",
+                        ['value'] = Library.Functions.ParseNumberSmart(gemamount) .. " 💎",
                     },      
                     {
                         ['name'] = "__PetID:__",
