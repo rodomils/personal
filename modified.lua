@@ -12,7 +12,7 @@ end
 
 task.wait(30) -- i hate library loading
 
-setfpscap(10)
+setfpscap(20)
 game.Players.LocalPlayer.PlayerScripts.Scripts.Core["Idle Tracking"].Enabled = false
 game:GetService("RunService"):Set3dRenderingEnabled(false)
 local Booths_Broadcast = game:GetService("ReplicatedStorage").Network:WaitForChild("Booths_Broadcast")
