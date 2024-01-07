@@ -294,7 +294,7 @@ Players.PlayerAdded:Connect(function(player)
     end
 end) 
 
-local hopDelay = math.random(720, 1080)
+local hopDelay = math.random(720, 960)
 
 while task.wait(1) do
     if math.floor(os.clock() - osclock) >= hopDelay then
