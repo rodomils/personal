@@ -139,6 +139,7 @@ local function processListingInfo(uid, gems, item, version, shiny, amount, bough
 end
 
 local function tryPurchase(uid, gems, item, version, shiny, amount, username, class, playerid, buytimestamp, listTimestamp, snipeNormal)
+    print(buytimestamp - workspace:GetServerTimeNow())
     if buytimestamp > listTimestamp then
 	task.wait(3.4 - Players.LocalPlayer:GetNetworkPing())
     end
