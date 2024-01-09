@@ -132,11 +132,12 @@ local function processListingInfo(uid, gems, item, version, shiny, amount, bough
 end
 
 local function tryPurchase(uid, gems, item, version, shiny, amount, username, class, playerid, buytimestamp, listTimestamp, snipeNormal)
-    if buytimestamp > listTimestamp then
-	repeat task.wait() until tick() > buytimestamp  
+    while true do 
+        if tick() > buytimestamp then
+            local boughtPet, boughtMessage = game:GetService("ReplicatedStorage").Network.Booths_RequestPurchase:InvokeServer(playerid, uid)
+            break
+	end
     end
-    local boughtPet, boughtMessage = game:GetService("ReplicatedStorage").Network.Booths_RequestPurchase:InvokeServer(playerid, uid)
-    print(boughtPet, boughtMessage)
     processListingInfo(uid, gems, item, version, shiny, amount, username, boughtPet, class, boughtMessage, snipeNormal)
 end
 
