@@ -39,7 +39,6 @@ Players.LocalPlayer.Idled:connect(function()
 end)
 
 local function processListingInfo(uid, gems, item, version, shiny, amount, boughtFrom, boughtStatus, class, failMessage, snipeNormal)
-    ptint(uid.." "..gems.." "..item.." "..version.." "..shiny.." "..amount.." "..boughtFrom.." "..boughtStatus.." "..class.." "..failMessage.." "..snipeNormal)
     local gemamount = Players.LocalPlayer.leaderstats["💎 Diamonds"].Value
     local snipeMessage ="||".. Players.LocalPlayer.Name .. "||"
     local weburl, webContent, webcolor
