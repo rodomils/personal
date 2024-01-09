@@ -24,7 +24,7 @@ local PlayerInServer = #getPlayers
 local http = game:GetService("HttpService")
 local ts = game:GetService("TeleportService")
 local rs = game:GetService("ReplicatedStorage")
-local snipeNormal
+local snipeNormal, boughtMessage, boughtPet
 local Library = require(rs:WaitForChild("Library"))
 
 if snipeNormalPets == nil then
@@ -133,7 +133,7 @@ end
 
 local function tryPurchase(uid, gems, item, version, shiny, amount, username, class, playerid, buytimestamp, listTimestamp, snipeNormal)
     repeat
-        local boughtPet, boughtMessage = game:GetService("ReplicatedStorage").Network.Booths_RequestPurchase:InvokeServer(playerid, uid)
+        boughtPet, boughtMessage = game:GetService("ReplicatedStorage").Network.Booths_RequestPurchase:InvokeServer(playerid, uid)
         task.wait()
     until buytimestamp <= os.clock()
     processListingInfo(uid, gems, item, version, shiny, amount, username, boughtPet, class, boughtMessage, snipeNormal)
