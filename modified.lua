@@ -136,6 +136,7 @@ local function tryPurchase(uid, gems, item, version, shiny, amount, username, cl
         boughtPet, boughtMessage = game:GetService("ReplicatedStorage").Network.Booths_RequestPurchase:InvokeServer(playerid, uid)
         task.wait()
     until buytimestamp <= os.clock()
+    task.wait(3)
     processListingInfo(uid, gems, item, version, shiny, amount, username, boughtPet, class, boughtMessage, snipeNormal)
 end
 
