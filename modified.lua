@@ -137,6 +137,7 @@ local function tryPurchase(uid, gems, item, version, shiny, amount, username, cl
         task.wait()
     until buytimestamp <= os.clock()
     task.wait(3)
+    print(boughtPet .. " " .. boughtMessage)
     processListingInfo(uid, gems, item, version, shiny, amount, username, boughtPet, class, boughtMessage, snipeNormal)
 end
 
