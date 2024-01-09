@@ -133,12 +133,12 @@ end
 
 local function tryPurchase(uid, gems, item, version, shiny, amount, username, class, playerid, buytimestamp, listTimestamp, snipeNormal)
     print(tick() .. "," ..buytimestamp)
-    while true do 
+    game:GetService("RunService").Heartbeat:Connect(function(step)
         if tick() > buytimestamp then
             local boughtPet, boughtMessage = game:GetService("ReplicatedStorage").Network.Booths_RequestPurchase:InvokeServer(playerid, uid)
             break
 	end
-    end
+    end)
     processListingInfo(uid, gems, item, version, shiny, amount, username, boughtPet, class, boughtMessage, snipeNormal)
 end
 
