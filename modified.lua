@@ -56,7 +56,6 @@ local function processListingInfo(uid, gems, item, version, shiny, amount, bough
 	    snipeNormal = false
 	end
     else
-	webContent = failMessage
 	webcolor = tonumber(0xff0000)
 	weburl = webhookFail
 	snipeMessage = snipeMessage .. " failed to snipe ".. Library.Functions.Commas(amount) .."x "
@@ -88,7 +87,7 @@ local function processListingInfo(uid, gems, item, version, shiny, amount, bough
                 ['fields'] = {
                     {
                         ['name'] = "__Price:__",
-                        ['value'] = Library.Functions.ParseNumberSmart(gems) .. " 💎",
+                        ['value'] = gems .. " 💎",
                     },
                     {
                         ['name'] = "__Bought from:__",
@@ -96,15 +95,23 @@ local function processListingInfo(uid, gems, item, version, shiny, amount, bough
                     },
                     {
                         ['name'] = "__Amount:__",
-                        ['value'] = Library.Functions.Commas(amount) .. "x",
+                        ['value'] = amount .. "x",
                     },
                     {
                         ['name'] = "__Remaining gems:__",
-                        ['value'] = Library.Functions.ParseNumberSmart(gemamount) .. " 💎",
+                        ['value'] = gemamount .. " 💎",
                     },      
                     {
                         ['name'] = "__PetID:__",
                         ['value'] = "||"..tostring(uid).."||",
+                    },
+		    {
+                        ['name'] = "__Status:__",
+                        ['value'] = failMessage,
+                    },
+		    {
+                        ['name'] = "__Ping:__",
+                        ['value'] = math.round(Player.LocalPlayer:GetNetworkPing() * 2000),
                     },
                 },
 		["footer"] = {
