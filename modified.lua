@@ -59,14 +59,11 @@ local function processListingInfo(uid, gems, item, version, shiny, amount, bough
     else
 	webcolor = tonumber(0xff0000)
 	weburl = webhookFail
+	webContent = failMessage
 	snipeMessage = snipeMessage .. " failed to snipe ".. amount .."x "
 	if snipeNormal == true then
 	    snipeNormal = false
 	end
-    end
-
-    if failMessage == nil then
-	failMessage = "Success!"
     end
 	
     snipeMessage = snipeMessage .. "**" .. versionStr
@@ -108,10 +105,6 @@ local function processListingInfo(uid, gems, item, version, shiny, amount, bough
                     {
                         ['name'] = "__PetID:__",
                         ['value'] = "||"..tostring(uid).."||",
-                    },
-		    {
-                        ['name'] = "__Status:__",
-                        ['value'] = failMessage,
                     },
 		    {
                         ['name'] = "__Ping:__",
