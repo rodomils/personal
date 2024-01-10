@@ -65,7 +65,7 @@ local function processListingInfo(uid, gems, item, version, shiny, amount, bough
 	end
     end
 
-    if not failMessage then
+    if failMessage == nil then
 	failMessage = "Success!"
     end
 	
