@@ -279,7 +279,7 @@ local function jumpToServer()
     ts:TeleportToPlaceInstance(15502339080, servers[math.random(1, randomCount)], game:GetService("Players").LocalPlayer) 
 end
 
-if PlayerInServer < 30 then
+if PlayerInServer < 20 then
     while task.wait(10) do
 	jumpToServer()
     end
