@@ -44,27 +44,33 @@ local function processListingInfo(uid, gems, item, version, shiny, amount, bough
     local versionVal = { [1] = "Golden ", [2] = "Rainbow " }
     local versionStr = versionVal[version] or (version == nil and "")
     local mention = ( class == "Pet" and (Library.Directory.Pets[item].huge or Library.Directory.Pets[item].titanic)) and "<@" .. userid .. ">" or ""
-	
+    
     if boughtStatus then
-	webcolor = tonumber(0x00ff00)
+        webcolor = tonumber(0x00ff00)
         snipeMessage = snipeMessage .. " just sniped ".. amount .."x "
         webContent = mention
-	webStatus = "Success!"
-	weburl = webhook
-	if snipeNormal == true then
-	    weburl = normalwebhook
-	    snipeNormal = false
-	end
+        webStatus = "Success!"
+        weburl = webhook
+        if snipeNormal == true then
+            weburl = normalwebhook
+            snipeNormal = false
+        end
     else
-	webcolor = tonumber(0xff0000)
-	weburl = webhookFail
-	webStatus = failMessage
-	snipeMessage = snipeMessage .. " failed to snipe ".. amount .."x "
-	if snipeNormal == true then
-	    snipeNormal = false
-	end
+        webcolor = tonumber(0xff0000)
+        weburl = webhookFail
+        webStatus = failMessage
+        snipeMessage = snipeMessage .. " failed to snipe ".. amount .."x "
+        if snipeNormal == true then
+            snipeNormal = false
+        end
+
+        if string.find(failMessage, "cannot buy that yet") then
+            task.wait(0.1)
+            coroutine.wrap(tryPurchase)(uid, gems, item, version, shiny, amount, boughtFrom, class, playerid, buytimestamp, listTimestamp, snipeNormal)
+            return
+        end
     end
-	
+    
     snipeMessage = snipeMessage .. "**" .. versionStr
     
     if shiny then
